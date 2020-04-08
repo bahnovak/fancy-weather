@@ -1,0 +1,88 @@
+body{
+    margin: 30px auto;
+    font-family: 'Comfortaa', cursive;
+    background-color: rgb(64, 238, 64);
+}
+
+.collection, .category{
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000;
+    justify-content: center;
+}
+
+
+.card, .cardCategory{
+    cursor: pointer;
+    border-radius: 15px;
+    transition: 0.8s;
+    transform-style: preserve-3d;
+    position: relative;
+    width: 300px;
+    height: 240px;
+    transform-origin: 50%;
+    background-color: rgb(228, 240, 69);
+    margin: 20px;
+    box-shadow: 0 0 3px 3px rgb(128, 127, 129);
+}
+
+.card:hover , .cardCategory:hover{
+    box-shadow: 0 0 5px 10px rgba(224, 13, 206, 0.733);
+}
+
+.img {
+    border-radius: 15px 15px 0 0;
+    width:100%
+}
+
+.imgCategory{
+    border-radius: 30%;
+    width: 80%;
+    box-shadow:  0 0 4px 1px black;
+
+}
+.cardCategory{
+    display: flex;
+    font-weight: 700;
+    font-size: 27px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: linear-gradient(to top, #2636c0, #f1da36);
+    color: #f3f3f1;
+    text-shadow: black 0 0 2px;
+}
+
+.word, .wordBack{
+    font-weight: 700;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.translate{
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+}
+
+
+
+.front, .back {
+    backface-visibility: hidden;
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+    
+
+.front {
+    z-index: 2;
+}
+    
+.back {
+    transform: rotateY(180deg);
+}
