@@ -87,7 +87,7 @@ export function createCardCategory(parent,collection){
         img.classList.add('imgCategory');
         div.classList.add('cardCategory');
 
-        img.src = collection[i][1].image;
+        img.src = collection[i][3].image;
 
         div.appendChild(img);
         div.innerHTML += collection[0][i-1];

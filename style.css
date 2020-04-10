@@ -1,14 +1,89 @@
 body{
     margin: 30px auto;
     font-family: 'Comfortaa', cursive;
-    background-color: rgb(64, 238, 64);
+    background: linear-gradient(to top, rgb(64, 238, 64), rgb(30, 240, 2), rgb(64, 238, 64));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.menu{
+    width: 100%;
+    margin: 20px 60px 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.burger{
+    transition: 0.5s;
+    width: 50px;
+    cursor: pointer;
+}
+
+.close{
+    transition: 0.5s;
+    cursor: pointer;
+    width: 30px;
+    position: absolute;
+    top: 59px;
+    left: 70px;
+}
+
+.burger:hover, .close:hover{
+    transform: rotate(180deg);
+}
+
+
+
+.navigation{
+    transition: 1s;
+    font-size: 30px;
+    position: fixed;
+    left:0;
+    top:0;
+    padding: 160px 35px 0 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+    background: linear-gradient(to top, rgb(58, 204, 0), rgb(107, 114, 106));
+    box-shadow: inset 0 0 1px 1px rgb(18, 156, 0),0 0 1px 1px rgb(18, 156, 0);
+    transform: translateX(-100%);
+    opacity: 0;
+    
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-size: 30px;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    text-shadow: rgb(0, 0, 0) 0 0 15px ;
+}
+
+.nav:hover{
+    color: rgb(2, 59, 1);
+    text-shadow: rgb(110, 196, 218) 0 0 15px ;
+}
+
+.icon{
+    transition: 0.5s;
+    width: 40px;
+    margin-right: 10px;
+}
+
+.icon:hover{
+    transform: translateX(5px);
 }
 
 .collection, .category{
-    display: flex;
+    display: none;
     flex-wrap: wrap;
-    perspective: 1000;
     justify-content: center;
+    perspective: 1000px;
 }
 
 
@@ -48,14 +123,14 @@ body{
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
-    background: linear-gradient(to top, #2636c0, #f1da36);
+    background: linear-gradient(to top, #196b00, #02f0dc);
     color: #f3f3f1;
     text-shadow: black 0 0 2px;
 }
 
 .word, .wordBack{
     font-weight: 700;
-    font-size: 25px;
+    font-size: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,4 +160,89 @@ body{
     
 .back {
     transform: rotateY(180deg);
+}
+
+
+/* TOGGLE */
+.l:before, .l:after {
+    box-sizing: border-box;
+
+}
+
+.toggle{
+    cursor: pointer;
+    box-sizing: border-box;
+    font-size: 4px;
+    display: flex;
+    align-items: center;
+}
+.train{
+    margin-right: 10px;
+    font-size: 38px;
+    font-weight: 700;
+    
+    color: rgb(255, 255, 255);
+    text-shadow: rgb(0, 0, 0) 0 0 15px ;
+}
+.l {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 0.75em;
+    box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.3) inset;
+    color: #fdea7b;
+    font-size: 5em;
+    display: inline-flex;
+    align-items: center;
+    margin: auto;
+    padding: 0.15em;
+    width: 3em;
+    height: 1.5em;
+    transition: background-color 0.1s 0.3s ease-out, box-shadow 0.1s 0.3s ease-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.l:before, .l:after {
+    content: "";
+    display: block;
+}
+.l:before {
+    background-color: #d7d7d7;
+    border-radius: 50%;
+    width: 1.2em;
+    height: 1.2em;
+    transition: background-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
+    z-index: 1;
+}
+.l:after {
+    background:
+        linear-gradient(transparent 50%, rgba(0,0,0,0.15) 0) 0 50% / 50% 100%,
+        repeating-linear-gradient(90deg,#bbb 0,#bbb,#bbb 20%,#999 20%,#999 40%) 0 50% / 50% 100%,
+        radial-gradient(circle at 50% 50%,#888 25%, transparent 26%);
+    background-repeat: no-repeat;
+    border: 0.25em solid transparent;
+    border-left: 0.4em solid #d8d8d8;
+    border-right: 0 solid transparent;
+    transition: border-left-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
+    transform: translateX(-22.5%);
+    transform-origin: 25% 50%;
+    width: 1.2em;
+    height: 1em;
+}
+/* Checked */
+.l:focus {
+    /* Normally an anti-A11Y practice, but set to remove an annoyance just for this demo */
+    outline: 0;
+}
+.l:checked {
+    background-color: rgba(0,0,0,0.45);
+    box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.1) inset;
+}
+.l:checked:before {
+    background-color: currentColor;
+    transform: translateX(125%)
+}
+.l:checked:after {
+    border-left-color: currentColor;
+    transform: translateX(-2.5%) rotateY(180deg);
 }
