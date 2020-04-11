@@ -41,7 +41,7 @@ export default function createMenu(parent,category){
         let div = document.createElement('div'),
             img = document.createElement('img');
 
-        img.src = `/img/${i+2}.png`;
+        img.src = `./img/${i+2}.png`;
 
         img.classList.add('icon');
         div.classList.add('nav');

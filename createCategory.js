@@ -29,7 +29,7 @@ export function createCard(arr,parent){
        translate.src = './img/rotate.svg';
        translate.style.height = '30px';
 
-       cardProt.addEventListener('mousedown',(e)=>{e.preventDefault()})
+       
 
         cardProt.addEventListener('click',(e)=>{
             if(e.target == translate){

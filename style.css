@@ -69,6 +69,11 @@ body{
     text-shadow: rgb(110, 196, 218) 0 0 15px ;
 }
 
+.navActive{
+    color: rgb(11, 11, 102);
+    text-shadow: rgb(248, 248, 248) 0 0 15px ;
+}
+
 .icon{
     transition: 0.5s;
     width: 40px;
@@ -106,8 +111,9 @@ body{
 }
 
 .img {
+    transition: 0.5s;
     border-radius: 15px 15px 0 0;
-    width:100%
+    width:100%;
 }
 
 .imgCategory{
@@ -138,9 +144,14 @@ body{
 }
 
 .translate{
+    transition: 0.5s;
     position: absolute;
     right: 0;
     margin-right: 10px;
+}
+
+.translate:hover{
+   transform: rotate(180deg);
 }
 
 
