@@ -122,11 +122,9 @@ let state = {
                     e.style.width = '';
                     e.style.height = '';
                     e.style.transform = '';
-                    
-                });
-
-                setTimeout(()=>{card.forEach(e=> e.style.overflow = '')},500);
-            }
+                
+                })
+            }        
         })
     },
 

@@ -33,6 +33,7 @@ export function createCard(arr,parent){
 
         cardProt.addEventListener('click',(e)=>{
             if(e.target == translate){
+                cardProt.style.overflow = ''
                 cardProt.style.transform = 'rotateY(180deg)';
             }
         })
