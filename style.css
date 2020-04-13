@@ -13,6 +13,8 @@ body{
     display: flex;
     justify-content: space-between;
 }
+
+
 .burger{
     transition: 0.5s;
     width: 50px;
@@ -110,7 +112,7 @@ body{
     box-shadow: 0 0 5px 10px rgba(224, 13, 206, 0.733);
 }
 
-.img {
+.img, .imgBack {
     transition: 0.5s;
     border-radius: 15px 15px 0 0;
     width:100%;
@@ -188,13 +190,20 @@ body{
     align-items: center;
 }
 .train{
+    transition: 0.5s;
     margin-right: 10px;
     font-size: 38px;
     font-weight: 700;
-    
     color: rgb(255, 255, 255);
     text-shadow: rgb(0, 0, 0) 0 0 15px ;
 }
+
+.train:hover{
+    color: rgb(245, 243, 138);
+    transform: translateX(10px);
+}
+
+
 .l {
     cursor: pointer;
     background-color: rgba(0,0,0,0.7);
