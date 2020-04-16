@@ -180,6 +180,14 @@ const state = {
       }
       document.addEventListener('click', eventPlay);
       document.addEventListener('click', (event) => {
+        if (event.target === toggle) {
+          document.removeEventListener('click', eventPlay);
+          repeatButton.removeEventListener('click', eventRepeat);
+          card.forEach((elem) => {
+            elem.classList.remove('cardParang');
+          });
+          createStars.clear();
+        }
         nav.forEach((e) => {
           if (e === event.target) {
             document.removeEventListener('click', eventPlay);
