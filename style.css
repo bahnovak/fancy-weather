@@ -344,10 +344,10 @@ body{
     transition: 0.5s;
     cursor: pointer;
     position: relative;
-    width: 50px;
+    width: 65px;
     z-index: 100;
     margin-left: 200px;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 .scoreButton:hover{
