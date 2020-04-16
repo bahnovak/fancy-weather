@@ -5,6 +5,7 @@ import createMenu from './modules/menu.js';
 import createTrainButton from './modules/createTrainModeButton.js';
 import CreateStars from './modules/starsDiv.js';
 import Modal from './modules/modal.js';
+import score from './modules/score.js';
 
 const body = document.querySelector('body');
 const category = document.createElement('div');
@@ -34,6 +35,7 @@ const card = document.querySelectorAll('.card');
 const trainButton = document.querySelector('.trainButton');
 const repeatButton = document.querySelector('.repeatButton');
 
+score(body, cards, navigation);
 document.addEventListener('mousedown', (e) => e.preventDefault());
 
 const state = {
@@ -212,6 +214,11 @@ const state = {
       }
 
       if (this.train === 1) {
+        if (this.position === 0) {
+          trainButton.innerHTML = 'Choose card';
+        } else if (this.position !== 0) {
+          trainButton.innerHTML = 'Play';
+        }
         word.forEach((e) => {
           e.style.visibility = 'hidden';
         });
