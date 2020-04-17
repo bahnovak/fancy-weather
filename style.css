@@ -338,16 +338,19 @@ body{
 }
 .table {
     margin: 50 auto;
+    border-spacing: 10px 10px;
+    text-align: center;
 }
 
 .scoreButton {
     transition: 0.5s;
     cursor: pointer;
-    position: relative;
+    position: absolute;
     width: 65px;
     z-index: 100;
-    margin-left: 200px;
-    margin-top: 30px;
+    margin-top: 410px;
+    margin-left: 220px;
+    transform: rotate(11deg);
 }
 
 .scoreButton:hover{

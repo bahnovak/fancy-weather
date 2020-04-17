@@ -17,6 +17,7 @@ export function createCard(arr, parent) {
     translate.classList.add('translate');
     img.classList.add('img');
     imgBack.classList.add('imgBack');
+    img.id = `${arr[i].word}`;
 
     img.src = `./img/${arr[i].word}.jpg`;
     imgBack.src = `./img/${arr[i].word}.jpg`;
@@ -32,6 +33,10 @@ export function createCard(arr, parent) {
         cardProt.style.overflow = '';
         cardProt.style.transform = 'rotateY(180deg)';
       }
+      const num = Number(localStorage.getItem(`${arr[i].word}Train`));
+      localStorage.setItem(`${arr[i].word}Train`, num + 1);
+      const td = document.querySelector(`.${arr[i].word}Train`);
+      td.innerHTML = localStorage.getItem(`${arr[i].word}Train`);
     });
     cardProt.addEventListener('mouseleave', (e) => {
       if (e.target === cardProt) {

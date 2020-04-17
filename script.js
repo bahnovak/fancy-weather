@@ -161,7 +161,20 @@ const state = {
       repeatButton.addEventListener('click', eventRepeat);
       function eventPlay(event) {
         event.stopPropagation();
+        const idImg = img[getPosition(array[0], position)].id;
         if (event.target === img[getPosition(array[0], position)]) {
+          const num = Number(localStorage.getItem(`${event.target.id}Play`));
+          localStorage.setItem(`${event.target.id}Play`, num + 1);
+          const td = document.querySelector(`.${event.target.id}Play`);
+          td.innerHTML = localStorage.getItem(`${event.target.id}Play`);
+          const tdTrain = document.querySelector(`.${event.target.id}Train`);
+          tdTrain.innerHTML = Number(localStorage.getItem(`${event.target.id}Train`)) - 1;
+          localStorage.setItem(`${event.target.id}Train`, Number(localStorage.getItem(`${event.target.id}Train`)) - 1);
+          const tdPercent = document.querySelector(`.${event.target.id}Percent`);
+          const trueAnswer = Number(localStorage.getItem(`${event.target.id}Play`));
+          const falseAnswer = Number(localStorage.getItem(`${event.target.id}Mistakes`));
+          tdPercent.innerHTML = Math.floor((100 * trueAnswer) / (trueAnswer + falseAnswer));
+          localStorage.setItem(`${event.target.id}Percent`, Math.floor((100 * trueAnswer) / (trueAnswer + falseAnswer)));
           createStars.addTrue();
           const audio = new Audio('./audio/correct.mp3');
           card[getPosition(array[0], position)].classList.add('cardParang');
@@ -172,6 +185,13 @@ const state = {
         } else {
           for (let i = 1; i < array.length; i += 1) {
             if (event.target === img[getPosition(array[i], position)]) {
+              const num = Number(localStorage.getItem(`${idImg}Mistakes`));
+              localStorage.setItem(`${idImg}Mistakes`, num + 1);
+              const td = document.querySelector(`.${idImg}Mistakes`);
+              td.innerHTML = localStorage.getItem(`${idImg}Mistakes`);
+              const tdTrain = document.querySelector(`.${event.target.id}Train`);
+              tdTrain.innerHTML = Number(localStorage.getItem(`${event.target.id}Train`)) - 1;
+              localStorage.setItem(`${event.target.id}Train`, Number(localStorage.getItem(`${event.target.id}Train`)) - 1);
               mistakes += 1;
               createStars.addFalse();
               const audio = new Audio('./audio/error.mp3');
