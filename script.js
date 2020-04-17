@@ -192,6 +192,11 @@ const state = {
               const tdTrain = document.querySelector(`.${event.target.id}Train`);
               tdTrain.innerHTML = Number(localStorage.getItem(`${event.target.id}Train`)) - 1;
               localStorage.setItem(`${event.target.id}Train`, Number(localStorage.getItem(`${event.target.id}Train`)) - 1);
+              const tdPercent = document.querySelector(`.${idImg}Percent`);
+              const trueAnswer = Number(localStorage.getItem(`${idImg}Play`));
+              const falseAnswer = Number(localStorage.getItem(`${idImg}Mistakes`));
+              tdPercent.innerHTML = Math.floor((100 * trueAnswer) / (trueAnswer + falseAnswer));
+              localStorage.setItem(`${idImg}Percent`, Math.floor((100 * trueAnswer) / (trueAnswer + falseAnswer)));
               mistakes += 1;
               createStars.addFalse();
               const audio = new Audio('./audio/error.mp3');
