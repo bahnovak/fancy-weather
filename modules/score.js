@@ -11,11 +11,73 @@ export default function score(parent, cards, navigation) {
   const close = document.createElement('img');
   close.classList.add('closeScore');
   close.src = './img/close.png';
+  const clear = document.createElement('button');
+  clear.classList.add('clearScore');
+  clear.innerHTML = 'Clear';
+  const menu = document.createElement('div');
+  menu.classList.add('menuScore');
+
+  function sortTable(n) {
+    let rows;
+    let switching = true;
+    let i;
+    let x;
+    let y;
+    let shouldSwitch;
+    let dir = 'asc';
+    let switchcount = 0;
+    while (switching) {
+      switching = false;
+      rows = table.getElementsByTagName('TR');
+      for (i = 1; i < (rows.length - 1); i += 1) {
+        shouldSwitch = false;
+
+        x = rows[i].getElementsByTagName('TD')[n];
+        y = rows[i + 1].getElementsByTagName('TD')[n];
+
+        if (dir === 'asc') {
+          if (n < 3) {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          } else if (n >= 3) {
+            if (Number(x.innerHTML) < Number(y.innerHTML)) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        } else if (dir === 'desc') {
+          if (n < 3) {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          } else if (n >= 3) {
+            if (Number(x.innerHTML) > Number(y.innerHTML)) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+      }
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        switchcount += 1;
+      } else if (switchcount === 0 && dir === 'asc') {
+        dir = 'desc';
+        switching = true;
+      }
+    }
+  }
 
   for (let i = 0; i < tabHead.length; i += 1) {
     const td = document.createElement('td');
     td.innerHTML = tabHead[i];
     tableHead.append(td);
+    td.style.cursor = 'pointer';
+    td.classList.add('tableSort');
   }
   table.append(tableHead);
   for (let i = 1; i < cards.length; i += 1) {
@@ -64,8 +126,27 @@ export default function score(parent, cards, navigation) {
     setTimeout(() => { scoreTable.style.display = ''; }, 500);
     scoreTable.style.opacity = '0';
   });
-  scoreTable.append(close);
+
+  clear.addEventListener('click', () => {
+    localStorage.clear();
+    const td = document.querySelectorAll('td');
+    td.forEach((e) => {
+      if (e.className && e.className !== 'tableSort') {
+        e.innerHTML = 0;
+      }
+    });
+  });
+  menu.append(close);
+  menu.append(clear);
+  scoreTable.append(menu);
   scoreTable.append(table);
   parent.append(scoreTable);
   navigation.append(scoreButton);
+
+  const tableSort = document.querySelectorAll('.tableSort');
+  tableSort.forEach((element, i) => {
+    element.addEventListener('click', () => {
+      sortTable(i);
+    });
+  });
 }

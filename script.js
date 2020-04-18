@@ -34,6 +34,7 @@ const img = document.querySelectorAll('.img');
 const card = document.querySelectorAll('.card');
 const trainButton = document.querySelector('.trainButton');
 const repeatButton = document.querySelector('.repeatButton');
+const toggleWord = document.querySelector('.train');
 
 score(body, cards, navigation);
 document.addEventListener('mousedown', (e) => e.preventDefault());
@@ -232,9 +233,11 @@ const state = {
         if (this.train === 1) {
           trainButton.style.display = '';
           repeatButton.style.display = '';
+          toggleWord.innerHTML = 'Train';
           this.train = 0;
         } else if (this.train === 0) {
           this.train = 1;
+          toggleWord.innerHTML = 'Play';
         }
       }
 
