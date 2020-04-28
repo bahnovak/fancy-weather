@@ -8,7 +8,6 @@ export default function createTrainButton(parent) {
 
   const image = document.createElement('img');
   image.src = './img/repeat.svg';
-  image.style.width = '25px';
   image.classList.add('repeat');
   repeatButton.appendChild(image);
 

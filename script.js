@@ -28,28 +28,53 @@ const nav = document.querySelectorAll('.nav');
 const navigation = document.querySelector('.navigation');
 const icon = document.querySelectorAll('.icon');
 const burger = document.querySelector('.burger');
-const toggle = document.querySelector('.l');
+const toggle = document.querySelector('.toggleButton');
 const word = document.querySelectorAll('.word');
 const img = document.querySelectorAll('.img');
 const card = document.querySelectorAll('.card');
 const trainButton = document.querySelector('.trainButton');
 const repeatButton = document.querySelector('.repeatButton');
 const toggleWord = document.querySelector('.train');
+const menu = document.querySelector('.menu');
 
 score(body, cards, navigation);
 document.addEventListener('mousedown', (e) => e.preventDefault());
 
-const state = {
+function shuffle(arrayShuffle) {
+  const arrayS = arrayShuffle;
+  let j;
+  let temp;
+  for (let i = arrayShuffle.length - 1; i > 0; i -= 1) {
+    j = Math.floor(Math.random() * (i + 1));
+    temp = arrayShuffle[j];
+    arrayS[j] = arrayShuffle[i];
+    arrayS[i] = temp;
+  }
+  return arrayS;
+}
+function check(array, mistakes) {
+  if (array.length === 0) {
+    if (mistakes === 0) {
+      const modalWin = new Modal(body, mistakes);
+      modalWin.create().win();
+      setTimeout(() => {
+        window.location.reload();
+      }, 4000);
+    } else if (mistakes !== 0) {
+      const modalLoss = new Modal(body, mistakes);
+      modalLoss.create().loss();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    }
+  }
+}
+
+const game = {
   position: 0,
   train: 0,
   play: 0,
 
-  reset() {
-    this.position = 0;
-    this.train = 0;
-    this.play = 0;
-    this.elemVisible();
-  },
   elemVisible() {
     function reset(arr) {
       arr.forEach((e) => { e.style.display = 'none'; });
@@ -64,12 +89,14 @@ const state = {
     }
     document.addEventListener('click', (event) => {
       if (!((event.target === burger) || (event.target === navigation))) {
-        navigation.style.transform = 'translateX(-100%)';
+        navigation.classList.remove('navigationOn');
+        navigation.classList.add('navigationOff');
       }
 
       cardCategory.forEach((e, i) => {
         if (e === event.target || event.target === imgCategory[i]) {
-          navigation.style.transform = 'translateX(-100%)';
+          navigation.classList.remove('navigationOn');
+          navigation.classList.add('navigationOff');
           collection[i].style.display = 'flex';
           category.style.display = 'none';
           this.position = i + 1;
@@ -78,7 +105,8 @@ const state = {
 
       nav.forEach((e, i) => {
         if (e === event.target || event.target === icon[i]) {
-          navigation.style.transform = 'translateX(-100%)';
+          navigation.classList.remove('navigationOn');
+          navigation.classList.add('navigationOff');
           if (i === 0) {
             reset(collection);
             home();
@@ -113,41 +141,13 @@ const state = {
       audio.play();
       return audio;
     }
-    function playGame(pos, context, arr = [0, 1, 2, 3, 4, 5, 6, 7]) {
-      const createStars = new CreateStars(body);
-      createStars.createLine();
+    function playGame(pos) {
+      const arr = [0, 1, 2, 3, 4, 5, 6, 7];
+      const createStars = new CreateStars(menu);
       const position = pos;
       let mistakes = 0;
       let array = arr;
-      function check() {
-        if (array.length === 0) {
-          if (mistakes === 0) {
-            const modalWin = new Modal(body, mistakes);
-            modalWin.create().win();
-            setTimeout(() => {
-              window.location.reload();
-            }, 4000);
-          } else if (mistakes !== 0) {
-            const modalLoss = new Modal(body, mistakes);
-            modalLoss.create().loss();
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000);
-          }
-        }
-      }
-      function shuffle(arrayShuffle) {
-        const arrayS = arrayShuffle;
-        let j;
-        let temp;
-        for (let i = arrayShuffle.length - 1; i > 0; i -= 1) {
-          j = Math.floor(Math.random() * (i + 1));
-          temp = arrayShuffle[j];
-          arrayS[j] = arrayShuffle[i];
-          arrayS[i] = temp;
-        }
-        return arrayS;
-      }
+
       if (array.length === 8) {
         array = shuffle(array);
       }
@@ -181,7 +181,7 @@ const state = {
           card[getPosition(array[0], position)].classList.add('cardParang');
           audio.play();
           array.shift();
-          check();
+          check(array, mistakes);
           setTimeout(() => { audioPlay(array[0], position); }, 300);
         } else {
           for (let i = 1; i < array.length; i += 1) {
@@ -314,5 +314,5 @@ const state = {
   },
 };
 
-state.elemVisible();
-state.trainMode();
+game.elemVisible();
+game.trainMode();

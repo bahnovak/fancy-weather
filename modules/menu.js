@@ -10,7 +10,7 @@ export default function createMenu(parent, category) {
   navigation.classList.add('navigation');
   menu.classList.add('menu');
   toggle.classList.add('toggle');
-  l.classList.add('l');
+  l.classList.add('toggleButton');
   burger.classList.add('burger');
   train.classList.add('train');
   close.classList.add('close');
@@ -20,8 +20,9 @@ export default function createMenu(parent, category) {
   close.src = './img/close.png';
 
   navigation.appendChild(close);
+  const arrayNamesCategory = category[0];
 
-  category[0].forEach((element, i) => {
+  arrayNamesCategory.forEach((element, i) => {
     if (i === 0) {
       const div = document.createElement('div');
       const img = document.createElement('img');
@@ -38,7 +39,7 @@ export default function createMenu(parent, category) {
     }
     const div = document.createElement('div');
     const img = document.createElement('img');
-
+    /* first cycle add two elements */
     img.src = `./img/${i + 2}.png`;
 
     img.classList.add('icon');
@@ -52,15 +53,15 @@ export default function createMenu(parent, category) {
 
   menu.addEventListener('click', (e) => {
     if (e.target === burger) {
-      navigation.style.transform = 'translateX(0)';
-      navigation.style.opacity = '100%';
+      navigation.classList.remove('navigationOff');
+      navigation.classList.add('navigationOn');
     }
   });
 
   navigation.addEventListener('click', (e) => {
     if (e.target === close) {
-      navigation.style.transform = 'translateX(-100%)';
-      navigation.style.opacity = '0';
+      navigation.classList.remove('navigationOn');
+      navigation.classList.add('navigationOff');
     }
   });
 

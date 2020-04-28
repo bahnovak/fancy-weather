@@ -1,3 +1,7 @@
+function randomInteger() {
+  const rand = Math.random() * 8;
+  return Math.floor(rand);
+}
 export function createCard(arr, parent) {
   for (let i = 0; i < arr.length; i += 1) {
     const cardProt = document.createElement('div');
@@ -30,8 +34,7 @@ export function createCard(arr, parent) {
 
     cardProt.addEventListener('click', (e) => {
       if (e.target === translate) {
-        cardProt.style.overflow = '';
-        cardProt.style.transform = 'rotateY(180deg)';
+        cardProt.classList.add('cardOverflow');
       }
       const num = Number(localStorage.getItem(`${arr[i].word}Train`));
       localStorage.setItem(`${arr[i].word}Train`, num + 1);
@@ -72,6 +75,7 @@ export function createCategory(parent, collection) {
 
 export function createCardCategory(parent, collection) {
   const names = Object.keys(collection);
+  const arrayNamesCategory = collection[0];
 
   for (let i = 1; i < names.length; i += 1) {
     const div = document.createElement('div');
@@ -79,10 +83,10 @@ export function createCardCategory(parent, collection) {
     img.classList.add('imgCategory');
     div.classList.add('cardCategory');
 
-    img.src = collection[i][7].image;
+    img.src = collection[i][randomInteger()].image;
 
     div.appendChild(img);
-    div.innerHTML += collection[0][i - 1];
+    div.innerHTML += arrayNamesCategory[i - 1];
     parent.appendChild(div);
   }
 }

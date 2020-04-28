@@ -1,4 +1,4 @@
-body{
+body {
     margin: 30px auto;
     font-family: 'Comfortaa', cursive;
     background: linear-gradient(to top, rgb(64, 238, 64), rgb(30, 240, 2), rgb(64, 238, 64));
@@ -7,7 +7,7 @@ body{
     justify-content: center;
     height: 100vh;
 }
-.modal{
+.modal {
     background-color: rgb(200, 232, 238);
     position: fixed;
     width: 100%;
@@ -23,36 +23,32 @@ body{
     font-weight: 700;
 }
 
-.trainModeColor{
+.trainModeColor {
     background: linear-gradient(to top, rgb(64, 238, 186), rgb(62, 179, 46), rgb(64, 238, 186));
 }
-
-.menu{
+.menu {
     width: 100%;
     margin: 20px 60px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-.lineStar{
+.lineStar {
     position: absolute;
     width: 100%;;
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: nowrap;
-    top: 95px;
+    margin-top: 50px;
+    margin-left: -100px;
 }
-
-
-.burger{
+.burger {
     transition: 0.5s;
     width: 50px;
     height: 50px;
     cursor: pointer;
 }
-
-.close{
+.close {
     transition: 0.5s;
     cursor: pointer;
     width: 30px;
@@ -60,12 +56,10 @@ body{
     top: 59px;
     left: 70px;
 }
-
-.burger:hover, .close:hover, .closeScore:hover{
+.burger:hover, .close:hover, .closeScore:hover {
     transform: rotate(180deg);
 }
-
-.navigation{
+.navigation {
     transition: 1s;
     font-size: 30px;
     position: fixed;
@@ -81,8 +75,15 @@ body{
     transform: translateX(-100%);
     opacity: 0;  
 }
-
-.nav{
+.navigationOn {
+    transform: translateX(0);
+    opacity: 100%;
+}
+.navigationOff {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+.nav {
     display: flex;
     align-items: center;
     transition: 0.3s;
@@ -93,35 +94,29 @@ body{
     color: rgb(255, 255, 255);
     text-shadow: rgb(0, 0, 0) 0 0 15px ;
 }
-
-.nav:hover{
+.nav:hover {
     color: rgb(2, 59, 1);
     text-shadow: rgb(110, 196, 218) 0 0 15px ;
 }
-
-.navActive{
+.navActive {
     color: rgb(11, 11, 102);
     text-shadow: rgb(248, 248, 248) 0 0 15px ;
 }
-
-.icon{
+.icon {
     transition: 0.5s;
     width: 40px;
     margin-right: 10px;
 }
-
-.icon:hover{
+.icon:hover {
     transform: translateX(5px);
 }
-
-.collection, .category{
+.collection, .category {
     display: none;
     flex-wrap: wrap;
     justify-content: center;
     perspective: 1000px;
 }
-
-.card, .cardCategory{
+.card, .cardCategory {
     cursor: pointer;
     border-radius: 15px;
     transition: 0.8s;
@@ -134,29 +129,28 @@ body{
     margin: 20px;
     box-shadow: 0 0 3px 3px rgb(128, 127, 129);
 }
-
-.cardParang{
+.cardParang {
     opacity: 50%;
     box-shadow:  0 0 5px 5px rgb(94, 20, 20);
 }
-
-.card:hover , .cardCategory:hover{
+.card:hover, .cardCategory:hover {
     box-shadow: 0 0 5px 10px rgba(224, 13, 206, 0.733);
 }
-
+.cardOverflow {
+    overflow: '';
+    transform: rotateY(180deg);
+}
 .img, .imgBack {
     transition: 0.5s;
     border-radius: 15px 15px 0 0;
     width:100%;
 }
-
-.imgCategory{
+.imgCategory {
     border-radius: 30%;
     width: 80%;
     box-shadow:  0 0 4px 1px black;
-
 }
-.cardCategory{
+.cardCategory {
     display: flex;
     font-weight: 700;
     font-size: 27px;
@@ -167,8 +161,7 @@ body{
     color: #f3f3f1;
     text-shadow: black 0 0 2px;
 }
-
-.word, .wordBack{
+.word, .wordBack {
     transition: 1s;
     font-weight: 700;
     font-size: 24px;
@@ -176,34 +169,28 @@ body{
     justify-content: center;
     align-items: center;
 }
-
-.translate{
+.translate {
     transition: 0.5s;
     position: absolute;
     right: 0;
     margin-right: 10px;
 }
-
-.translate:hover{
+.translate:hover {
    transform: rotate(180deg);
 }
-
 .front, .back {
     backface-visibility: hidden;
     position: absolute;
     top: 0;
     left: 0;
-}
-    
+}  
 .front {
     z-index: 2;
-}
-    
+}  
 .back {
     transform: rotateY(180deg);
 }
-
-.trainButton, .repeatButton{
+.trainButton, .repeatButton {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -223,35 +210,33 @@ body{
     color: rgb(255, 255, 255);
     text-shadow: rgb(0, 0, 0) 0 0 15px ;
 }
-.trainButton:hover, .repeatButton:hover{
+.trainButton:hover, .repeatButton:hover {
     background-color: rgb(3, 77, 1);
     box-shadow: 0 0 5px 5px rgb(64, 153, 101);
 }
-.trainButton:active, .repeatButton:active{
+.trainButton:active, .repeatButton:active {
     background-color: rgb(3, 77, 1);
     box-shadow: inset 0 0 5px 2px rgb(149, 231, 183);
 }
-
-.repeatButton{
+.repeatButton {
     display: none;
 }
-
-.repeat{
+.repeat {
+    width: 25px;
     margin-left: 5px;
 }
-
 /* TOGGLE */
-.l:before, .l:after {
+.toggleButton:before, .toggleButton:after {
     box-sizing: border-box;
 }
-.toggle{
+.toggle {
     cursor: pointer;
     box-sizing: border-box;
     font-size: 4px;
     display: flex;
     align-items: center;
 }
-.train{
+.train {
     transition: 0.5s;
     margin-right: 10px;
     font-size: 38px;
@@ -259,11 +244,11 @@ body{
     color: rgb(255, 255, 255);
     text-shadow: rgb(0, 0, 0) 0 0 15px ;
 }
-.train:hover{
+.train:hover {
     color: rgb(245, 243, 138);
     transform: translateX(10px);
 }
-.l {
+.toggleButton {
     cursor: pointer;
     background-color: rgba(0,0,0,0.7);
     border-radius: 0.75em;
@@ -281,11 +266,11 @@ body{
     -moz-appearance: none;
     appearance: none;
 }
-.l:before, .l:after {
+.toggleButton:before, .toggleButton:after {
     content: "";
     display: block;
 }
-.l:before {
+.toggleButton:before {
     background-color: #d7d7d7;
     border-radius: 50%;
     width: 1.2em;
@@ -293,7 +278,7 @@ body{
     transition: background-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
     z-index: 1;
 }
-.l:after {
+.toggleButton:after {
     background:
         linear-gradient(transparent 50%, rgba(0,0,0,0.15) 0) 0 50% / 50% 100%,
         repeating-linear-gradient(90deg,#bbb 0,#bbb,#bbb 20%,#999 20%,#999 40%) 0 50% / 50% 100%,
@@ -309,23 +294,22 @@ body{
     height: 1em;
 }
 /* Checked */
-.l:focus {
+.toggleButton:focus {
     /* Normally an anti-A11Y practice, but set to remove an annoyance just for this demo */
     outline: 0;
 }
-.l:checked {
+.toggleButton:checked {
     background-color: rgba(0,0,0,0.45);
     box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.1) inset;
 }
-.l:checked:before {
+.toggleButton:checked:before {
     background-color: currentColor;
     transform: translateX(125%)
 }
-.l:checked:after {
+.toggleButton:checked:after {
     border-left-color: currentColor;
     transform: translateX(-2.5%) rotateY(180deg);
 }
-
 .score {
     transition: 0.5s;
     background-color: rgb(63, 221, 147);
@@ -344,7 +328,6 @@ body{
     border-spacing: 10px 10px;
     text-align: center;
 }
-
 .scoreButton {
     transition: 0.5s;
     cursor: pointer;
@@ -355,11 +338,10 @@ body{
     margin-left: 220px;
     transform: rotate(11deg);
 }
-
-.scoreButton:hover{
+.scoreButton:hover {
     transform: translateX(-10px);
 }
-.menuScore{
+.menuScore {
     display: flex;
     width:100%;
     margin-bottom: 30px;
@@ -367,13 +349,13 @@ body{
     margin-left: 30px
 }
 
-.closeScore{
+.closeScore {
     transition: 0.5s;
     cursor: pointer;
     width: 25px;
 }
 
-.clearScore{
+.clearScore {
     transition: 0.5s;
     cursor: pointer;
     border: none;
@@ -385,11 +367,10 @@ body{
     font-weight: 700;
     color: rgb(231, 229, 229);
 }
-
 .clearScore:hover {
     box-shadow: 0 0 5px 5px rgb(219, 218, 218);
 }
-.tableSort{
+.tableSort {
     transition: 0.2s;
     font-size: 20px;
     font-weight: 700;

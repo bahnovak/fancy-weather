@@ -20,41 +20,41 @@ export default function score(parent, cards, navigation) {
   function sortTable(n) {
     let rows;
     let switching = true;
-    let i;
-    let x;
-    let y;
+    let count;
+    let rowOne;
+    let rowTwo;
     let shouldSwitch;
     let dir = 'asc';
     let switchcount = 0;
     while (switching) {
       switching = false;
       rows = table.getElementsByTagName('TR');
-      for (i = 1; i < (rows.length - 1); i += 1) {
+      for (count = 1; count < (rows.length - 1); count += 1) {
         shouldSwitch = false;
 
-        x = rows[i].getElementsByTagName('TD')[n];
-        y = rows[i + 1].getElementsByTagName('TD')[n];
+        rowOne = rows[count].getElementsByTagName('TD')[n];
+        rowTwo = rows[count + 1].getElementsByTagName('TD')[n];
 
         if (dir === 'asc') {
           if (n < 3) {
-            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            if (rowOne.innerHTML.toLowerCase() > rowTwo.innerHTML.toLowerCase()) {
               shouldSwitch = true;
               break;
             }
           } else if (n >= 3) {
-            if (Number(x.innerHTML) < Number(y.innerHTML)) {
+            if (Number(rowOne.innerHTML) < Number(rowTwo.innerHTML)) {
               shouldSwitch = true;
               break;
             }
           }
         } else if (dir === 'desc') {
           if (n < 3) {
-            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            if (rowOne.innerHTML.toLowerCase() < rowTwo.innerHTML.toLowerCase()) {
               shouldSwitch = true;
               break;
             }
           } else if (n >= 3) {
-            if (Number(x.innerHTML) > Number(y.innerHTML)) {
+            if (Number(rowOne.innerHTML) > Number(rowTwo.innerHTML)) {
               shouldSwitch = true;
               break;
             }
@@ -62,7 +62,7 @@ export default function score(parent, cards, navigation) {
         }
       }
       if (shouldSwitch) {
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        rows[count].parentNode.insertBefore(rows[count + 1], rows[count]);
         switching = true;
         switchcount += 1;
       } else if (switchcount === 0 && dir === 'asc') {
@@ -86,24 +86,28 @@ export default function score(parent, cards, navigation) {
       const arr = [cards[i][j].word, cards[i][j].translation, cards[0][i - 1], 0, 0, 0, 0];
       for (let k = 0; k < arr.length; k += 1) {
         const td = document.createElement('td');
+        /* Train column */
         if (k === 3) {
           td.classList.add(`${cards[i][j].word}Train`);
           if (!localStorage.getItem(`${cards[i][j].word}Train`)) {
             localStorage.setItem(`${cards[i][j].word}Train`, 0);
             td.innerHTML = localStorage.getItem(`${cards[i][j].word}Train`);
           } else td.innerHTML = localStorage.getItem(`${cards[i][j].word}Train`);
+          /* True column */
         } else if (k === 4) {
           td.classList.add(`${cards[i][j].word}Play`);
           if (!localStorage.getItem(`${cards[i][j].word}Play`)) {
             localStorage.setItem(`${cards[i][j].word}Play`, 0);
             td.innerHTML = localStorage.getItem(`${cards[i][j].word}Play`);
           } else td.innerHTML = localStorage.getItem(`${cards[i][j].word}Play`);
+          /* Mistakes column */
         } else if (k === 5) {
           td.classList.add(`${cards[i][j].word}Mistakes`);
           if (!localStorage.getItem(`${cards[i][j].word}Mistakes`)) {
             localStorage.setItem(`${cards[i][j].word}Mistakes`, 0);
             td.innerHTML = localStorage.getItem(`${cards[i][j].word}Mistakes`);
           } else td.innerHTML = localStorage.getItem(`${cards[i][j].word}Mistakes`);
+          /* Mistakes column */
         } else if (k === 6) {
           td.classList.add(`${cards[i][j].word}Percent`);
           if (!localStorage.getItem(`${cards[i][j].word}Percent`)) {

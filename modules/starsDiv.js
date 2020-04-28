@@ -1,9 +1,6 @@
 export default class CreateStars {
   constructor(parent) {
     this.parent = parent;
-  }
-
-  createLine() {
     this.lineStar = document.createElement('div');
     this.lineStar.classList.add('lineStar');
     this.parent.appendChild(this.lineStar);
