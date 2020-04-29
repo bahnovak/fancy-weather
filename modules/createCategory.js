@@ -35,6 +35,7 @@ export function createCard(arr, parent) {
     cardProt.addEventListener('click', (e) => {
       if (e.target === translate) {
         cardProt.classList.add('cardOverflow');
+        cardProt.classList.remove('cardOverflowFront');
       }
       const num = Number(localStorage.getItem(`${arr[i].word}Train`));
       localStorage.setItem(`${arr[i].word}Train`, num + 1);
@@ -43,7 +44,8 @@ export function createCard(arr, parent) {
     });
     cardProt.addEventListener('mouseleave', (e) => {
       if (e.target === cardProt) {
-        cardProt.style.transform = 'rotateY(0deg)';
+        cardProt.classList.add('cardOverflowFront');
+        cardProt.classList.remove('cardOverflow');
       }
     });
 
