@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unpublished-require */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -23,8 +22,8 @@ module.exports = {
         to: path.resolve(__dirname, 'dist'),
       },
       {
-        from: path.resolve(__dirname, 'src/img'),
-        to: path.resolve(__dirname, 'dist/img'),
+        from: path.resolve(__dirname, 'src/public'),
+        to: path.resolve(__dirname, 'dist/public'),
       },
     ]),
     new MiniCssExtractPlugin({
