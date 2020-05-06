@@ -7,6 +7,7 @@ function getRate(id) {
 }
 function getValues(data) {
   const result = [];
+  const id = [];
   const idArray = [];
   const keys = Object.keys(data.Search);
   for (let i = 0; i < keys.length; i += 1) {
@@ -16,12 +17,14 @@ function getValues(data) {
     arr.push(data.Search[i].Year);
     result.push(arr);
     idArray.push(getRate(data.Search[i].imdbID));
+    id.push(data.Search[i].imdbID);
   }
   async function getResult() {
     const resultId = await Promise.all(idArray);
     function test() {
       for (let i = 0; i < resultId.length; i += 1) {
         result[i].push(resultId[i]);
+        result[i].push(`https://www.imdb.com/title/${id[i]}/`);
       }
     }
     await test();

@@ -1,16 +1,17 @@
 class CreateCard {
-  constructor(name, img, year, rating, parent) {
+  constructor(name, img, year, rating, link, parent) {
     this.name = name;
     this.img = img;
     this.year = year;
     this.rating = rating;
+    this.link = link;
     this.parent = parent;
     this.card = document.createElement('div');
     this.card.classList.add('card');
   }
 
   create() {
-    const nameMovie = document.createElement('div');
+    const nameMovie = document.createElement('a');
     nameMovie.classList.add('nameMovie');
     const imgMovie = document.createElement('img');
     imgMovie.classList.add('imgMovie');
@@ -20,7 +21,12 @@ class CreateCard {
     ratingMovie.classList.add('ratingMovie');
 
     nameMovie.textContent = this.name;
+    nameMovie.href = this.link;
+    nameMovie.target = '_blank';
     imgMovie.src = this.img;
+    if (this.img === 'N/A') {
+      imgMovie.src = './src/img/noImage.jpg';
+    }
     yearMovie.textContent = this.year;
     ratingMovie.textContent = this.rating;
 
