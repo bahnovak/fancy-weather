@@ -1,47 +1,65 @@
+/* eslint-disable no-param-reassign */
+function getRate(id) {
+  const url = `https://www.omdbapi.com/?i=${id}&apikey=736dfe54`;
+  return fetch(url)
+    .then((res) => res.json())
+    .then((dataId) => dataId.imdbRating);
+}
 function getValues(data) {
   const result = [];
+  const idArray = [];
   const keys = Object.keys(data.Search);
   for (let i = 0; i < keys.length; i += 1) {
-    const obj = {};
-    obj.name = data.Search[i].Title;
-    obj.img = data.Search[i].Poster;
-    obj.year = data.Search[i].Year;
-    const url = `https://www.omdbapi.com/?i=${data.Search[i].imdbID}&apikey=736dfe54`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((dataId) => {
-        obj.rating = dataId.imdbRating;
-      });
-    result.push(obj);
+    const arr = [];
+    arr.push(data.Search[i].Title);
+    arr.push(data.Search[i].Poster);
+    arr.push(data.Search[i].Year);
+    result.push(arr);
+    idArray.push(getRate(data.Search[i].imdbID));
   }
-  return result;
+  async function getResult() {
+    const resultId = await Promise.all(idArray);
+    function test() {
+      for (let i = 0; i < resultId.length; i += 1) {
+        result[i].push(resultId[i]);
+      }
+    }
+    await test();
+    return result;
+  }
+  return getResult().then((val) => val);
 }
 
 class GetAbout {
   constructor(request) {
     this.request = request;
-    this.movies = [];
+    this.page = 2;
   }
 
   getFirstPage() {
-    let array = [];
     async function getMovies(request) {
       const url = `https://www.omdbapi.com/?s=${request}&apikey=736dfe54`;
       const res = await fetch(url);
       const data = await res.json();
       const arr = await getValues(data);
-      console.log(arr);
-      array = arr;
+      return arr;
     }
-    getMovies(this.request);
-    this.movies = array;
-    console.log(this.movies);
+
+    return getMovies(this.request).then((val) => val);
   }
 
-  getMoviesArray() {
-    this.getFirstPage();
-    return this.movies;
+  getNextPage() {
+    async function getMovies(request, page) {
+      const url = `https://www.omdbapi.com/?s=${request}&page=${page}&apikey=736dfe54`;
+      const res = await fetch(url);
+      const data = await res.json();
+      const arr = await getValues(data);
+      return arr;
+    }
+    return getMovies(this.request, this.page).then((val) => {
+      this.page += 1;
+      return val;
+    });
   }
 }
-
 export default GetAbout;
