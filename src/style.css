@@ -24,9 +24,11 @@ main {
     display: flex;
     justify-content: center;
     width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.search button {
+.searchButton {
     height: 30px;
 }
 
@@ -36,7 +38,7 @@ main {
 }
 
 .slider {
-    max-width: 1025px;
+    width: 1025px;
     overflow: hidden;
 }
 
@@ -59,7 +61,19 @@ main {
 }
 
 .imgMovie {
-    width: 100%;
+    width: 225px;
+    height: 333px;
+    margin-top: 5px;
+}
+
+.nameMovie {
+    display: block;
+    color: black;
+    text-decoration: none;
+    font-size: 25px;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 footer {

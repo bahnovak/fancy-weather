@@ -35,6 +35,7 @@ function getValues(data) {
 
 class GetAbout {
   constructor(request) {
+    console.log(request);
     this.request = request;
     this.page = 2;
   }
