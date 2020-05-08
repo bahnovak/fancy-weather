@@ -43,7 +43,7 @@ main {
 }
 
 .cardContain {
-    transition: 0.5s;
+    transition: 1s;
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;

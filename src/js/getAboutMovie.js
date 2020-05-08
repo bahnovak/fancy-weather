@@ -35,18 +35,21 @@ function getValues(data) {
 
 class GetAbout {
   constructor(request) {
-    console.log(request);
-    this.request = request;
+    this.request = request.trim();
     this.page = 2;
   }
 
   getFirstPage() {
     async function getMovies(request) {
-      const url = `https://www.omdbapi.com/?s=${request}&apikey=736dfe54`;
-      const res = await fetch(url);
-      const data = await res.json();
-      const arr = await getValues(data);
-      return arr;
+      try {
+        const url = `https://www.omdbapi.com/?s=${request}&apikey=736dfe54`;
+        const res = await fetch(url);
+        const data = await res.json();
+        const arr = await getValues(data);
+        return arr;
+      } catch (e) {
+        throw Error();
+      }
     }
 
     return getMovies(this.request).then((val) => val);

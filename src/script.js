@@ -21,7 +21,7 @@ async function getTranslation(word) {
 }
 
 class Application {
-  constructor(request = 'harry potter') {
+  constructor(request = 'star wars') {
     this.movies = new GetAbout(request);
     this.page = 'next';
     this.position = 4;
@@ -87,10 +87,14 @@ class Application {
         if (isCyrillic(searchInput.value)) {
           getTranslation(searchInput.value)
             .then((val) => {
-              console.log(val);
               context.movies = new GetAbout(val);
-              context.clear();
-              context.createCardFilms();
+              if (context.movies.getFirstPage().catch((e) => e)) {
+                console.log(context.movies.getFirstPage().catch((e) => e));
+              } else {
+                console.log('up');
+                context.clear();
+                context.createCardFilms();
+              }
             });
         } else {
           context.movies = new GetAbout(searchInput.value.toLowerCase());
