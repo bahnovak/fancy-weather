@@ -52,7 +52,9 @@ class GetAbout {
       }
     }
 
-    return getMovies(this.request).then((val) => val);
+    return getMovies(this.request)
+      .then((val) => val)
+      .catch(() => false);
   }
 
   getNextPage() {

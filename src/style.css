@@ -26,15 +26,39 @@ main {
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.clear {
+    position: absolute;
+    margin-left: -185px;
 }
 
 .searchButton {
     height: 30px;
 }
 
+.searchInput {
+    width:300px;
+    padding-left: 40px;
+}
+
 .content {
     display: flex;
     align-items: center;
+}
+
+.info {
+    transition: 0.5s;
+    position: absolute;
+    margin-top: 50px;
+    font-size: 25px;
+    opacity: 0;
+}
+
+.infoShow {
+    transition: 0.5s;
+    opacity: 100%;
 }
 
 .slider {
@@ -43,7 +67,8 @@ main {
 }
 
 .cardContain {
-    transition: 1s;
+    margin-top: 30px;
+    transition: 0.5s;
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;

@@ -8,6 +8,8 @@ const prev = document.querySelector('.prev');
 const next = document.querySelector('.next');
 const searchButton = document.querySelector('.searchButton');
 const searchInput = document.querySelector('.searchInput');
+const info = document.querySelector('.info');
+const clear = document.querySelector('.clear');
 
 function isCyrillic(text) {
   return /[а-я]/i.test(text);
@@ -18,6 +20,24 @@ async function getTranslation(word) {
   const res = await fetch(url);
   const data = await res.json();
   return String(data.text).toLowerCase();
+}
+
+function showInfo(val, correct) {
+  if (correct === 'correct') {
+    info.textContent = `Showing results for ${val}`;
+    info.classList.add('infoShow');
+    setTimeout(() => {
+      info.classList.remove('infoShow');
+    }, 5000);
+  }
+
+  if (correct === 'incorrect') {
+    info.textContent = `No results for ${val}`;
+    info.classList.add('infoShow');
+    setTimeout(() => {
+      info.classList.remove('infoShow');
+    }, 5000);
+  }
 }
 
 class Application {
@@ -67,41 +87,60 @@ class Application {
       if (context.position !== 4) {
         const { transform } = cardContain.style;
         const value = transform.match(/-\d+|\d+/g);
-        cardContain.style.transform = `translateX(${Number(value[0]) + 510}px)`;
-        context.position -= 2;
+        cardContain.style.transform = `translateX(${Number(value[0]) + 255}px)`;
+        context.position -= 1;
       }
     });
     next.addEventListener('click', () => {
       checkPositionCard();
       const { transform } = cardContain.style;
       const value = transform.match(/-\d+|\d+/g);
-      cardContain.style.transform = `translateX(${Number(value[0]) - 510}px)`;
-      context.position += 2;
+      cardContain.style.transform = `translateX(${Number(value[0]) - 255}px)`;
+      context.position += 1;
     });
   }
 
   search() {
     const context = this;
-    searchButton.addEventListener('click', () => {
+    searchInput.focus();
+    function searchShow() {
       if (searchInput.value) {
         if (isCyrillic(searchInput.value)) {
           getTranslation(searchInput.value)
             .then((val) => {
               context.movies = new GetAbout(val);
-              if (context.movies.getFirstPage().catch((e) => e)) {
-                console.log(context.movies.getFirstPage().catch((e) => e));
-              } else {
-                console.log('up');
-                context.clear();
-                context.createCardFilms();
-              }
+              context.movies.getFirstPage().then((e) => {
+                if (e) {
+                  context.clear();
+                  context.createCardFilms();
+                  showInfo(val, 'correct');
+                } else {
+                  showInfo(val, 'incorrect');
+                }
+              });
             });
         } else {
           context.movies = new GetAbout(searchInput.value.toLowerCase());
-          context.clear();
-          context.createCardFilms();
+          context.movies.getFirstPage().then((e) => {
+            if (e) {
+              context.clear();
+              context.createCardFilms();
+            } else {
+              showInfo(searchInput.value.toLowerCase(), 'incorrect');
+            }
+          });
         }
       }
+    }
+    searchButton.addEventListener('click', searchShow);
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Enter') {
+        searchShow();
+      }
+    });
+
+    clear.addEventListener('click', () => {
+      searchInput.value = '';
     });
   }
 
