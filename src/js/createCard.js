@@ -25,7 +25,7 @@ class CreateCard {
     nameMovie.target = '_blank';
     imgMovie.src = this.img;
     if (this.img === 'N/A') {
-      imgMovie.src = './src/public/noImage.jpg';
+      imgMovie.src = '../public/noImage.jpg';
     }
     yearMovie.textContent = this.year;
     ratingMovie.textContent = this.rating;
