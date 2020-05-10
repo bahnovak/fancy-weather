@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 function getRate(id) {
-  const url = `https://www.omdbapi.com/?i=${id}&apikey=736dfe54`;
+  const url = `https://www.omdbapi.com/?i=${id}&apikey=e858f9dd`;
   return fetch(url)
     .then((res) => res.json())
     .then((dataId) => dataId.imdbRating);
@@ -27,7 +27,7 @@ function getValues(data) {
         result[i].push(`https://www.imdb.com/title/${id[i]}/`);
       }
     }
-    await test();
+    test();
     return result;
   }
   return getResult().then((val) => val);
@@ -42,7 +42,7 @@ class GetAbout {
   getFirstPage() {
     async function getMovies(request) {
       try {
-        const url = `https://www.omdbapi.com/?s=${request}&apikey=736dfe54`;
+        const url = `https://www.omdbapi.com/?s=${request}&apikey=e858f9dd`;
         const res = await fetch(url);
         const data = await res.json();
         const arr = await getValues(data);
@@ -59,16 +59,18 @@ class GetAbout {
 
   getNextPage() {
     async function getMovies(request, page) {
-      const url = `https://www.omdbapi.com/?s=${request}&page=${page}&apikey=736dfe54`;
+      const url = `https://www.omdbapi.com/?s=${request}&page=${page}&apikey=e858f9dd`;
       const res = await fetch(url);
       const data = await res.json();
       const arr = await getValues(data);
       return arr;
     }
-    return getMovies(this.request, this.page).then((val) => {
-      this.page += 1;
-      return val;
-    });
+    return getMovies(this.request, this.page)
+      .then((val) => {
+        this.page += 1;
+        return val;
+      })
+      .catch(() => false);
   }
 }
 export default GetAbout;

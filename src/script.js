@@ -1,5 +1,5 @@
-/* eslint-disable prettier/prettier */
 import './style.css';
+import './css/load.css';
 import CreateCard from './js/createCard';
 import GetAbout from './js/getAboutMovie';
 
@@ -10,6 +10,10 @@ const searchButton = document.querySelector('.searchButton');
 const searchInput = document.querySelector('.searchInput');
 const info = document.querySelector('.info');
 const clear = document.querySelector('.clear');
+const load = document.querySelector('.load');
+const content = document.querySelector('.content');
+
+load.addEventListener('mousedown', (e) => e.preventDefault());
 
 function isCyrillic(text) {
   return /[а-я]/i.test(text);
@@ -41,7 +45,7 @@ function showInfo(val, correct) {
 }
 
 class Application {
-  constructor(request = 'star wars') {
+  constructor(request = 'harry potter') {
     this.movies = new GetAbout(request);
     this.page = 'next';
     this.position = 4;
@@ -53,19 +57,25 @@ class Application {
     const context = this;
     async function createCards() {
       if (page === 'first') {
+        load.classList.add('loadOn');
+        content.classList.add('contentOff');
         const description = await context.movies.getFirstPage();
         for (let i = 0; i < description.length; i += 1) {
           const card = new CreateCard(...description[i], cardContain);
           card.create();
         }
+        load.classList.remove('loadOn');
+        content.classList.remove('contentOff');
       }
 
       if (page === 'next') {
+        load.classList.add('loadOn');
         const description = await context.movies.getNextPage();
         for (let i = 0; i < description.length; i += 1) {
           const card = new CreateCard(...description[i], cardContain);
           card.create();
         }
+        load.classList.remove('loadOn');
       }
     }
     createCards();
@@ -74,10 +84,11 @@ class Application {
   slider() {
     const context = this;
     function checkPositionCard() {
-      // load next page if 7th card page on the right
+      // load next page if 5th card page on the right
       if (
-        context.position % 10 === 6
-        && context.position > context.dozenCards
+        // eslint-disable-next-line operator-linebreak
+        context.position % 10 === 5 &&
+        context.position > context.dozenCards
       ) {
         context.createCardFilms('next');
         context.dozenCards += 10;
@@ -93,10 +104,13 @@ class Application {
     });
     next.addEventListener('click', () => {
       checkPositionCard();
-      const { transform } = cardContain.style;
-      const value = transform.match(/-\d+|\d+/g);
-      cardContain.style.transform = `translateX(${Number(value[0]) - 255}px)`;
-      context.position += 1;
+      const card = document.querySelectorAll('.card');
+      if (context.position < card.length) {
+        const { transform } = cardContain.style;
+        const value = transform.match(/-\d+|\d+/g);
+        cardContain.style.transform = `translateX(${Number(value[0]) - 255}px)`;
+        context.position += 1;
+      }
     });
   }
 
@@ -106,19 +120,18 @@ class Application {
     function searchShow() {
       if (searchInput.value) {
         if (isCyrillic(searchInput.value)) {
-          getTranslation(searchInput.value)
-            .then((val) => {
-              context.movies = new GetAbout(val);
-              context.movies.getFirstPage().then((e) => {
-                if (e) {
-                  context.clear();
-                  context.createCardFilms();
-                  showInfo(val, 'correct');
-                } else {
-                  showInfo(val, 'incorrect');
-                }
-              });
+          getTranslation(searchInput.value).then((val) => {
+            context.movies = new GetAbout(val);
+            context.movies.getFirstPage().then((e) => {
+              if (e) {
+                context.clear();
+                context.createCardFilms();
+                showInfo(val, 'correct');
+              } else {
+                showInfo(val, 'incorrect');
+              }
             });
+          });
         } else {
           context.movies = new GetAbout(searchInput.value.toLowerCase());
           context.movies.getFirstPage().then((e) => {
@@ -141,6 +154,7 @@ class Application {
 
     clear.addEventListener('click', () => {
       searchInput.value = '';
+      searchInput.focus();
     });
   }
 
