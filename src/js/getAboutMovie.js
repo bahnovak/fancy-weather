@@ -5,6 +5,17 @@ function getRate(id) {
     .then((res) => res.json())
     .then((dataId) => dataId.imdbRating);
 }
+async function getResult(idArr, res, idMov) {
+  const resultId = await Promise.all(idArr);
+  function test() {
+    for (let i = 0; i < resultId.length; i += 1) {
+      res[i].push(resultId[i]);
+      res[i].push(`https://www.imdb.com/title/${idMov[i]}/`);
+    }
+  }
+  test();
+  return res;
+}
 function getValues(data) {
   const result = [];
   const id = [];
@@ -19,18 +30,7 @@ function getValues(data) {
     idArray.push(getRate(data.Search[i].imdbID));
     id.push(data.Search[i].imdbID);
   }
-  async function getResult() {
-    const resultId = await Promise.all(idArray);
-    function test() {
-      for (let i = 0; i < resultId.length; i += 1) {
-        result[i].push(resultId[i]);
-        result[i].push(`https://www.imdb.com/title/${id[i]}/`);
-      }
-    }
-    test();
-    return result;
-  }
-  return getResult().then((val) => val);
+  return getResult(idArray, result, id).then((val) => val);
 }
 
 class GetAbout {

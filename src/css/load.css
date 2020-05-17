@@ -1,16 +1,16 @@
-.load{
-    height: 100%;
-    width: 100%;
-    display: none;
-    position: fixed;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    background-color: rgba(2, 2, 2, 0.418);
+.load {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  background-color: rgba(2, 2, 2, 0.418);
 }
 
 .loadOn {
-    display: flex;
+  display: flex;
 }
 
 .bubblingG {
@@ -48,11 +48,11 @@
 }
 
 #bubblingG_2 {
-	animation-delay: 0.1995s;
-		-o-animation-delay: 0.1995s;
-		-ms-animation-delay: 0.1995s;
-		-webkit-animation-delay: 0.1995s;
-		-moz-animation-delay: 0.1995s;
+	animation-delay: 0.2s;
+		-o-animation-delay: 0.2s;
+		-ms-animation-delay: 0.2s;
+		-webkit-animation-delay: 0.2s;
+		-moz-animation-delay: 0.2s;
 }
 
 #bubblingG_3 {
@@ -62,8 +62,6 @@
 		-webkit-animation-delay: 0.389s;
 		-moz-animation-delay: 0.389s;
 }
-
-
 
 @keyframes bubblingG {
 	0% {

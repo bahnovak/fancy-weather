@@ -1,4 +1,5 @@
 import './style.css';
+import './css/reset.css';
 import './css/load.css';
 import CreateCard from './js/createCard';
 import GetAbout from './js/getAboutMovie';
@@ -27,7 +28,7 @@ async function getTranslation(word) {
 }
 
 function showInfo(val, correct) {
-  if (correct === 'correct') {
+  if (correct) {
     info.textContent = `Showing results for ${val}`;
     info.classList.add('infoShow');
     setTimeout(() => {
@@ -35,7 +36,7 @@ function showInfo(val, correct) {
     }, 5000);
   }
 
-  if (correct === 'incorrect') {
+  if (!correct) {
     info.textContent = `No results for ${val}`;
     info.classList.add('infoShow');
     setTimeout(() => {
@@ -126,9 +127,9 @@ class Application {
               if (e) {
                 context.clear();
                 context.createCardFilms();
-                showInfo(val, 'correct');
+                showInfo(val, true);
               } else {
-                showInfo(val, 'incorrect');
+                showInfo(val, false);
               }
             });
           });
@@ -139,7 +140,7 @@ class Application {
               context.clear();
               context.createCardFilms();
             } else {
-              showInfo(searchInput.value.toLowerCase(), 'incorrect');
+              showInfo(searchInput.value.toLowerCase(), false);
             }
           });
         }
@@ -160,7 +161,7 @@ class Application {
 
   clear() {
     const cards = document.querySelectorAll('.card');
-    cards.forEach((e) => e.remove());
+    cards.forEach((elem) => elem.remove());
     this.position = 4;
     this.dozenCards = 0;
     cardContain.style.transform = 'translateX(0px)';
