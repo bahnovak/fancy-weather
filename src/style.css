@@ -1,0 +1,74 @@
+@import "./style/reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+#map {  
+     width: 500px; 
+     height: 500px;
+}
+
+body {
+    font-family: Montserrat;
+    padding: 40px 90px 0 90px;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.control {
+    display: flex;
+}
+
+.updateImg, .lang {
+    margin-right: 10px;
+}
+
+.lang select {
+    height: 44px;
+    width: 71px;
+    background: rgba(174, 181, 185, 0.5);
+    border-radius: 5px;
+    border: none;
+    font-family: Montserrat;
+    padding-left: 15px;
+}
+
+.search {
+    display: flex;
+}
+
+.citySearch {
+    box-sizing: border-box;
+    width: 274px;
+    height: 44px;
+    background: rgba(76, 82, 85, 0.4);
+    border: 1px solid rgba(228, 227, 227, 0.2);
+    font-family: Montserrat;
+    font-size: 16px;
+    padding-left: 15px;
+}
+
+.citySearch::placeholder {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.buttonSearch {
+    border: none;
+    width: 101px;
+    height: 44px;
+    background: rgba(174, 181, 185, 0.5);
+    border-radius: 0 5px 5px 0;
+    box-sizing: border-box;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-left: -5px;
+}
