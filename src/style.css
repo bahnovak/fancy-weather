@@ -72,3 +72,11 @@ header {
     color: #FFFFFF;
     margin-left: -5px;
 }
+
+.iconToday {
+    height:50px;
+}
+
+.iconNext {
+    height: 30px;
+}
