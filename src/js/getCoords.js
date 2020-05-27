@@ -1,16 +1,17 @@
 /* eslint-disable prettier/prettier */
 
-function getTimesOfDay(obj) {
+function getTimesOfDay(obj, sec) {
+  const zoneHours = sec / 3600;
   const dateNow = new Date();
-  dateNow.setHours(dateNow.getUTCHours());
+  dateNow.setHours(dateNow.getUTCHours() + zoneHours);
   const rise = new Date(obj.rise.apparent * 1000);
-  rise.setHours(rise.getUTCHours());
+  rise.setHours(rise.getUTCHours() + zoneHours);
   const set = new Date(obj.set.apparent * 1000);
-  set.setHours(set.getUTCHours());
+  set.setHours(set.getUTCHours() + zoneHours);
 
   console.log(dateNow, rise, set);
 
-  if ((Date.now() / 1000) > rise && (Date.now() / 1000) < set) {
+  if (dateNow.getHours() > rise.getHours() && dateNow.getHours() < set.getHours()) {
     return 'day';
   }
   return 'night';
@@ -30,7 +31,7 @@ class GetCoords {
       console.log(coords);
       result.coord = coords.results[0].annotations.DMS;
       result.sec = coords.results[0].annotations.timezone.offset_sec;
-      result.timeOfDay = getTimesOfDay(coords.results[0].annotations.sun);
+      result.timeOfDay = getTimesOfDay(coords.results[0].annotations.sun, result.sec);
       return result;
     }
     return getPos();

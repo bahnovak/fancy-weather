@@ -6,7 +6,7 @@ function mapInit(lat, long) {
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
     center: [lat, long],
-    zoom: 8,
+    zoom: 10,
   });
 
   const marker = new mapboxgl.Marker()

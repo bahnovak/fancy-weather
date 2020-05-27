@@ -8,6 +8,14 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="load">
+        <div class="bubblingG">
+            <span id="bubblingG_1"></span>
+            <span id="bubblingG_2"></span>
+            <span id="bubblingG_3"></span>
+        </div>
+    </div>
+    <img src="" alt="" class="background">
     <header>
         <div class="control">
             <div class="updateImg">
@@ -46,8 +54,8 @@
             <div class="time"></div>
             <div class="weatherToday">
                 <div class="tempToday"></div>
-                <img src="" alt="" class="iconToday">
                 <div class="infoToday">
+                    <img src="" alt="" class="iconToday">
                     <div class="description">
                     </div>
                     <div class="feels">
@@ -64,21 +72,21 @@
             <div class="weatherNextContain">
                 <div class="nextDay">
                     <div class="weekdayNext"></div>
-                    <div class="wetherNext">
+                    <div class="weatherNext">
                         <div class="tempNext"></div>
                         <img src="" alt="" class="iconNext">
                     </div>  
                 </div>
                 <div class="nextDay">
                     <div class="weekdayNext"></div>
-                    <div class="wetherNext">
+                    <div class="weatherNext">
                         <div class="tempNext"></div>
                         <img src="" alt="" class="iconNext">
                     </div>  
                 </div>
                 <div class="nextDay">
                     <div class="weekdayNext"></div>
-                    <div class="wetherNext">
+                    <div class="weatherNext">
                         <div class="tempNext"></div>
                         <img src="" alt="" class="iconNext">
                     </div>  
@@ -88,12 +96,16 @@
         <div class="map">
             <div id="map"></div>
             <div class="coords">
-                <div class="latVal"></div>
-                <div class="longVal"></div>
+                <div class="latitude">
+                    <div class="latInfo">Latitude :&nbsp</div>
+                    <div class="latVal"></div>
+                </div>
+                <div class="longitude">
+                    <div class="longInfo">Longitude :&nbsp</div>
+                    <div class="longVal"></div>
+                </div>
             </div>
         </div>
-    </main>
-    
-    
+    </main> 
 </body>
 </html>
