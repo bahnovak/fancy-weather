@@ -1,30 +1,23 @@
-const options = {
-  weekday: 'long',
-  day: 'numeric',
-  month: 'long',
-};
-
-const optionsTime = {
-  hour: 'numeric',
-  minute: 'numeric',
-  second: 'numeric',
-};
-
 class Timer {
-  constructor(lang, parent) {
+  constructor(lang, parent, sec) {
     this.lang = lang;
     this.parent = parent;
+    this.sec = sec;
   }
 
   getDate() {
+    const dateNow = new Date();
+    dateNow.setHours(dateNow.getUTCHours() + this.sec / 3600);
     const date = document.createElement('div');
     date.classList.add('date');
     const timer = document.createElement('div');
     timer.classList.add('timer');
     setInterval(() => {
-      timer.innerHTML = new Date().toLocaleString('ru', optionsTime);
+      const dateTimer = new Date();
+      dateTimer.setHours(dateTimer.getUTCHours() + this.sec / 3600);
+      timer.innerHTML = `${dateTimer.getHours()}:${dateTimer.getMinutes()}:${dateTimer.getSeconds()}`;
     }, 1000);
-    date.innerHTML = new Date().toLocaleString(this.lang, options);
+    date.innerHTML = dateNow.toDateString().slice(0, -4);
 
     this.parent.append(date);
     this.parent.append(timer);

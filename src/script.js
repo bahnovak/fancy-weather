@@ -18,6 +18,8 @@ const humidityVal = document.querySelector('.humidityVal');
 const weekdayNext = document.querySelectorAll('.weekdayNext');
 const tempNext = document.querySelectorAll('.tempNext');
 const iconNext = document.querySelectorAll('.iconNext');
+const latVal = document.querySelector('.latVal');
+const longVal = document.querySelector('.longVal');
 
 class Applocation {
   firstInit() {
@@ -39,16 +41,18 @@ class Applocation {
         tempNext[i - 1].innerHTML = resWeather[i].temp;
         iconNext[i - 1].src = weatherIcons[resWeather[i].icon];
       }
-      // const pic = new GetPicture(up[0].description);
+      // const pic = new GetPicture(`spring day`);
       // const resPic = await pic.getPic();
       // console.log(resPic);
       mapInit(location[1], location[0]);
-      const coord = new GetCoords(res.city);
+      const coord = new GetCoords('new york');
       const coordsRes = await coord.get();
       // eslint-disable-next-line prefer-destructuring
-      city.innerHTML = coordsRes[0];
+      city.innerHTML = coordsRes.city;
+      latVal.innerHTML = coordsRes.coord.lat;
+      longVal.innerHTML = coordsRes.coord.lng;
       console.log(coordsRes);
-      const time = new Timer('en', timer);
+      const time = new Timer('en', timer, coordsRes.sec);
       time.getDate();
     }
 
