@@ -32,6 +32,7 @@ class GetCoords {
       result.coord = coords.results[0].annotations.DMS;
       result.sec = coords.results[0].annotations.timezone.offset_sec;
       result.timeOfDay = getTimesOfDay(coords.results[0].annotations.sun, result.sec);
+      result.coordForMap = coords.results[0].geometry;
       return result;
     }
     return getPos();

@@ -24,25 +24,38 @@ const iconNext = document.querySelectorAll('.iconNext');
 const latVal = document.querySelector('.latVal');
 const longVal = document.querySelector('.longVal');
 const background = document.querySelector('.background');
+const citySearch = document.querySelector('.citySearch');
+const buttonSearch = document.querySelector('.buttonSearch');
+const updateImg = document.querySelector('.updateImg');
 
 class Applocation {
-  firstInit() {
+  init(request) {
+    const context = this;
     async function information() {
+      let cityRequest = request;
       loader(true);
-      const inform = await fetch('https://ipinfo.io/json?token=85dd844063d0c0');
-      const res = await inform.json();
-      const location = res.loc.split(',');
-      const weather = new GetWeather(res.city, 'en');
+      if (!request) {
+        const inform = await fetch('https://ipinfo.io/json?token=85dd844063d0c0');
+        const res = await inform.json();
+        cityRequest = res.city;
+      }
+      const weather = new GetWeather(cityRequest, 'en');
       const resWeather = await weather.get();
-      const coord = new GetCoords(res.city);
+      const coord = new GetCoords(cityRequest);
       const coordsRes = await coord.get();
+      const dat = document.querySelector('.date');
+      const tim = document.querySelector('.timer');
+      dat.remove();
+      tim.remove();
       const time = new Timer('en', timer, coordsRes.sec);
       time.getDate();
-
+      context.description = resWeather[0].description;
+      context.timeOfDay = coordsRes.timeOfDay;
       // const pic = new GetPicture(
       //   `${coordsRes.timeOfDay}${resWeather[0].description}`
       // );
       // const resPic = await pic.getPic();
+      // background.src = resPic;
       background.src = './public/desc.jpg';
       console.log(resWeather);
       tempToday.innerHTML = resWeather[0].temp;
@@ -56,7 +69,7 @@ class Applocation {
         tempNext[i - 1].innerHTML = resWeather[i].temp;
         iconNext[i - 1].src = weatherIcons[resWeather[i].icon];
       }
-      mapInit(location[1], location[0]);
+      mapInit(coordsRes.coordForMap.lng, coordsRes.coordForMap.lat);
       // eslint-disable-next-line prefer-destructuring
       city.innerHTML = coordsRes.city;
       latVal.innerHTML = `${coordsRes.coord.lat}`;
@@ -67,7 +80,34 @@ class Applocation {
 
     information();
   }
+
+  search() {
+    buttonSearch.addEventListener('click', () => {
+      this.init(citySearch.value);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        this.init(citySearch.value);
+      }
+    });
+  }
+
+  updatePic() {
+    const context = this;
+    async function update() {
+      const pic = new GetPicture(
+        `${context.timeOfDay}${context.description}`
+      );
+      const resPic = await pic.getPic();
+      background.src = resPic;
+    }
+    updateImg.addEventListener('click', () => {
+      update();
+    });
+  }
 }
 
 const app = new Applocation();
-app.firstInit();
+app.init();
+app.search();
+app.updatePic();
