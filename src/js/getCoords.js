@@ -9,8 +9,6 @@ function getTimesOfDay(obj, sec) {
   const set = new Date(obj.set.apparent * 1000);
   set.setHours(set.getUTCHours() + zoneHours);
 
-  console.log(dateNow, rise, set);
-
   if (dateNow.getHours() > rise.getHours() && dateNow.getHours() < set.getHours()) {
     return 'day';
   }
@@ -28,7 +26,6 @@ class GetCoords {
       const res = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${conntext.request}&key=f5a4e91f008a486eabc54807865a5f8e&pretty=1&limit=1&language=en`);
       const coords = await res.json();
       result.city = coords.results[0].formatted;
-      console.log(coords);
       result.coord = coords.results[0].annotations.DMS;
       result.sec = coords.results[0].annotations.timezone.offset_sec;
       result.timeOfDay = getTimesOfDay(coords.results[0].annotations.sun, result.sec);

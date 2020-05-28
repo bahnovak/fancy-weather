@@ -8,6 +8,7 @@ import mapInit from './js/getMap';
 import GetCoords from './js/getCoords';
 import WeatherIcons from './js/getIcon';
 import loader from './js/loader';
+import Translate from './js/translate';
 
 const weatherIcons = new WeatherIcons();
 const city = document.querySelector('.city');
@@ -104,6 +105,11 @@ class Applocation {
     updateImg.addEventListener('click', () => {
       update();
     });
+  }
+
+  translate() {
+    const trans = new Translate('en', 'be', '800');
+    trans.do();
   }
 }
 

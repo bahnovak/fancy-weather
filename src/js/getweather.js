@@ -4,10 +4,10 @@ const options = {
 };
 
 function desiredDate(val) {
-  const day = new Date().getDate();
+  const day = new Date();
   const hour = new Date().getHours();
   const date = new Date(val);
-  if (date.getDate() === day && hour >= date.getHours()) {
+  if (date.getDate() === day.getDate() && hour >= date.getHours()) {
     return true;
   }
   if (
@@ -28,6 +28,7 @@ function desiredValueSort(arr, lang) {
       res[i].feels_like = Math.round(arr[i].main.feels_like);
       res[i].wind = arr[i].wind.speed;
       res[i].humidity = arr[i].main.humidity;
+      res[i].id = arr[i].weather[i].id;
     }
 
     if (i > 0) {
@@ -36,7 +37,6 @@ function desiredValueSort(arr, lang) {
     res[i].temp = Math.round(arr[i].main.temp);
     res[i].icon = arr[i].weather[0].icon;
   }
-
   return res;
 }
 function desiredValue(arr, lang) {
