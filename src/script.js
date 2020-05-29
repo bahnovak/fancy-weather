@@ -30,6 +30,7 @@ const buttonSearch = document.querySelector('.buttonSearch');
 const updateImg = document.querySelector('.updateImg');
 const chooseLang = document.querySelector('.chooseLang');
 
+
 async function searchRequest(val, context) {
   const weather = new GetWeather(val, 'en');
   const resWeather = await weather.get();
@@ -99,6 +100,11 @@ class Applocation {
       city.innerHTML = coordsRes.city;
       latVal.innerHTML = `${coordsRes.coord.lat}`;
       longVal.innerHTML = `${coordsRes.coord.lng}`;
+      if (localStorage.getItem('lang')) {
+        const trans = new Translate(context.lang, localStorage.getItem('lang'), context.id);
+        chooseLang.value = localStorage.getItem('lang');
+        trans.do();
+      }
       loader(false);
     }
 
@@ -119,6 +125,7 @@ class Applocation {
   updatePic() {
     const context = this;
     async function update() {
+      updateImg.classList.add('anim');
       background.classList.add('backgroundOpacity');
       const pic = new GetPicture(
         `${context.description} ${context.timeOfDay}`
@@ -129,6 +136,7 @@ class Applocation {
       if (!resPic) {
         background.src = await './public/desc.jpg';
       }
+      setTimeout(() => updateImg.classList.remove('anim'), 500);
     }
     updateImg.addEventListener('click', () => {
       update();
