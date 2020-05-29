@@ -28,8 +28,30 @@ const background = document.querySelector('.background');
 const citySearch = document.querySelector('.citySearch');
 const buttonSearch = document.querySelector('.buttonSearch');
 const updateImg = document.querySelector('.updateImg');
+const chooseLang = document.querySelector('.chooseLang');
+
+async function searchRequest(val, context) {
+  const weather = new GetWeather(val, 'en');
+  const resWeather = await weather.get();
+  if (resWeather) {
+    context.init(val);
+  } else {
+    citySearch.classList.add('citySearchIncorrect');
+    citySearch.value = 'Incorrect request';
+    setTimeout(() => {
+      citySearch.classList.remove('citySearchIncorrect');
+      setTimeout(() => {
+        citySearch.value = '';
+      }, 500);
+    }, 700);
+  }
+}
 
 class Applocation {
+  constructor() {
+    this.lang = 'en';
+  }
+
   init(request) {
     const context = this;
     async function information() {
@@ -52,19 +74,21 @@ class Applocation {
       time.getDate();
       context.description = resWeather[0].description;
       context.timeOfDay = coordsRes.timeOfDay;
-      // const pic = new GetPicture(
-      //   `${coordsRes.timeOfDay}${resWeather[0].description}`
-      // );
-      // const resPic = await pic.getPic();
-      // background.src = resPic;
-      background.src = './public/desc.jpg';
-      console.log(resWeather);
+      const pic = new GetPicture(
+        `${coordsRes.timeOfDay}${resWeather[0].description}`
+      );
+      const resPic = await pic.getPic();
+      background.src = resPic;
+      if (!resPic) {
+        background.src = await './public/desc.jpg';
+      }
       tempToday.innerHTML = resWeather[0].temp;
       iconToday.src = weatherIcons[resWeather[0].icon];
       description.innerHTML = resWeather[0].description.toUpperCase();
       feelsVal.innerHTML = resWeather[0].feels_like;
       windVal.innerHTML = resWeather[0].wind;
       humidityVal.innerHTML = resWeather[0].humidity;
+      context.id = resWeather[0].id;
       for (let i = 1; i < resWeather.length; i += 1) {
         weekdayNext[i - 1].innerHTML = resWeather[i].weekday;
         tempNext[i - 1].innerHTML = resWeather[i].temp;
@@ -75,7 +99,6 @@ class Applocation {
       city.innerHTML = coordsRes.city;
       latVal.innerHTML = `${coordsRes.coord.lat}`;
       longVal.innerHTML = `${coordsRes.coord.lng}`;
-      console.log(coordsRes);
       loader(false);
     }
 
@@ -84,11 +107,11 @@ class Applocation {
 
   search() {
     buttonSearch.addEventListener('click', () => {
-      this.init(citySearch.value);
+      searchRequest(citySearch.value, this);
     });
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
-        this.init(citySearch.value);
+        searchRequest(citySearch.value, this);
       }
     });
   }
@@ -96,11 +119,16 @@ class Applocation {
   updatePic() {
     const context = this;
     async function update() {
+      background.classList.add('backgroundOpacity');
       const pic = new GetPicture(
-        `${context.timeOfDay}${context.description}`
+        `${context.description} ${context.timeOfDay}`
       );
       const resPic = await pic.getPic();
-      background.src = resPic;
+      background.src = await resPic;
+      setTimeout(() => background.classList.remove('backgroundOpacity'), 500);
+      if (!resPic) {
+        background.src = await './public/desc.jpg';
+      }
     }
     updateImg.addEventListener('click', () => {
       update();
@@ -108,8 +136,14 @@ class Applocation {
   }
 
   translate() {
-    const trans = new Translate('en', 'be', '800');
-    trans.do();
+    chooseLang.addEventListener('click', (event) => {
+      if (event.target.value !== this.lang) {
+        const trans = new Translate(this.lang, event.target.value, this.id);
+        trans.do();
+        this.lang = event.target.value;
+        localStorage.setItem('lang', event.target.value);
+      }
+    });
   }
 }
 
@@ -117,3 +151,4 @@ const app = new Applocation();
 app.init();
 app.search();
 app.updatePic();
+app.translate();

@@ -6,15 +6,11 @@ const options = {
 function desiredDate(val) {
   const day = new Date();
   const hour = new Date().getHours();
-  const date = new Date(val);
-  if (date.getDate() === day.getDate() && hour >= date.getHours()) {
+  const dateVal = new Date(val);
+  if (dateVal.getDate() === day.getDate() && hour >= dateVal.getHours()) {
     return true;
   }
-  if (
-    date.getDate() > day &&
-    date.getHours() === 12 &&
-    date.getDate() <= day + 3
-  ) {
+  if (dateVal.getHours() === 12) {
     return true;
   }
   return false;
@@ -22,7 +18,7 @@ function desiredDate(val) {
 function desiredValueSort(arr, lang) {
   const res = [{}, {}, {}, {}];
 
-  for (let i = 0; i < arr.length; i += 1) {
+  for (let i = 0; i < 4; i += 1) {
     if (i === 0) {
       res[i].description = arr[i].weather[i].description;
       res[i].feels_like = Math.round(arr[i].main.feels_like);
@@ -42,7 +38,7 @@ function desiredValueSort(arr, lang) {
 function desiredValue(arr, lang) {
   const result = [];
   arr.forEach((element) => {
-    if (desiredDate(element.dt_txt)) {
+    if (desiredDate(element.dt_txt) && result.length < 4) {
       result.push(element);
     }
   });
@@ -65,7 +61,9 @@ class GetWeather {
       const resWether = await cityRequest.json();
       return desiredValue(resWether.list, context.lang);
     }
-    return weather();
+    return weather()
+      .then((e) => e)
+      .catch(() => false);
   }
 }
 

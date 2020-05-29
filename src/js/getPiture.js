@@ -7,6 +7,7 @@ class GetPicture {
   getPic() {
     const context = this;
     async function getFromApi() {
+      console.log(`Картинка по запросу ${context.request}`);
       const res = await fetch(
         `https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&query=${context.request}&client_id=zc5MC8x6DZIscbMTf_qpxvWZKMjQN-NkR_1RLwC4PVY`
       );
@@ -14,7 +15,7 @@ class GetPicture {
       return img.urls.regular;
     }
 
-    return getFromApi();
+    return getFromApi().catch(() => false);
   }
 }
 
