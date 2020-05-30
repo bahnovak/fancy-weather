@@ -9,6 +9,7 @@ import GetCoords from './js/getCoords';
 import WeatherIcons from './js/getIcon';
 import loader from './js/loader';
 import Translate from './js/translate';
+import Converter from './js/tempConverter';
 
 const weatherIcons = new WeatherIcons();
 const city = document.querySelector('.city');
@@ -105,6 +106,7 @@ class Applocation {
         chooseLang.value = localStorage.getItem('lang');
         trans.do();
       }
+      context.converter();
       loader(false);
     }
 
@@ -114,10 +116,12 @@ class Applocation {
   search() {
     buttonSearch.addEventListener('click', () => {
       searchRequest(citySearch.value, this);
+      citySearch.value = '';
     });
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
         searchRequest(citySearch.value, this);
+        citySearch.value = '';
       }
     });
   }
@@ -153,6 +157,11 @@ class Applocation {
       }
     });
   }
+
+  converter() {
+    const conv = new Converter();
+    conv.do();
+  }
 }
 
 const app = new Applocation();
@@ -160,3 +169,4 @@ app.init();
 app.search();
 app.updatePic();
 app.translate();
+app.converter();

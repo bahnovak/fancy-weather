@@ -37,6 +37,7 @@
 }
 
 .cel, .fah {
+    transition: 1s;
     cursor: pointer;
     display: flex;
     justify-content: center;
