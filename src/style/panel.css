@@ -71,6 +71,7 @@
 
 .search {
     display: flex;
+    align-items: center;
 }
 
 .citySearch {
@@ -130,8 +131,35 @@
     box-shadow: inset 0 0 5px 5px rgb(117, 117, 116);
 }
 
+.micro {
+    cursor: pointer;
+    transition: 0.5s;
+    height: 35px;
+    margin-left: 10px;
+}
+
+.micro:hover {
+    transform: scale(1.1);
+}
+
 .anim {
     animation: 0.7s linear 0s infinite normal anim;
+}
+
+.animMicro {
+    animation: 0.7s linear 0s infinite alternate animMicro;
+}
+
+
+@keyframes animMicro {
+    0% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 7px rgb(253, 0, 0));
+    }
 }
 
 @keyframes anim {

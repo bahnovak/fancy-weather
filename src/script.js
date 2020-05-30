@@ -30,6 +30,7 @@ const citySearch = document.querySelector('.citySearch');
 const buttonSearch = document.querySelector('.buttonSearch');
 const updateImg = document.querySelector('.updateImg');
 const chooseLang = document.querySelector('.chooseLang');
+const micro = document.querySelector('.micro');
 
 
 async function searchRequest(val, context) {
@@ -162,6 +163,39 @@ class Applocation {
     const conv = new Converter();
     conv.do();
   }
+
+  recognition() {
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    // eslint-disable-next-line no-undef
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = true;
+    recognition.lang = 'ru';
+    function recoStart() {
+      recognition.start();
+    }
+    micro.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      if (!micro.classList.contains('animMicro')) {
+        micro.classList.add('animMicro');
+        recognition.addEventListener('result', (event) => {
+          const transcript = Array.from(event.results)
+            .map((result) => result[0])
+            .map((result) => result.transcript)
+            .join('');
+          if (event.results[0].isFinal) {
+            searchRequest(transcript, this);
+          }
+        });
+        recognition.addEventListener('end', recoStart);
+        recognition.start();
+      } else if (micro.classList.contains('animMicro')) {
+        micro.classList.remove('animMicro');
+        recognition.abort();
+        recognition.removeEventListener('end', recoStart);
+      }
+    });
+  }
 }
 
 const app = new Applocation();
@@ -170,3 +204,4 @@ app.search();
 app.updatePic();
 app.translate();
 app.converter();
+app.recognition();
