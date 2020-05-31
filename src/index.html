@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fancy Weather</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="load">
+        <div class="bubblingG">
+            <span id="bubblingG_1"></span>
+            <span id="bubblingG_2"></span>
+            <span id="bubblingG_3"></span>
+        </div>
+    </div>
+    <img src="" alt="" class="background">
+    <header>
+        <div class="control">
+            <div class="updateImg">
+                <img src="./public/update.png" width="45px" alt="" >                    
+            </div>
+            <div class="lang">
+                <select class="chooseLang">
+                    <option>en</option>
+                    <option>ru</option>
+                    <option>be</option>
+                </select>
+            </div>
+            <div class="temperature">
+                <div class="cel active">°C</div>
+                <div class="fah">°F</div>                  
+            </div>
+        </div>
+        <div class="search">
+            <input type="text" class="citySearch" placeholder="Search city or ZIP">
+            <button class="buttonSearch">Search</button>
+            <img src="./public/micro.png" alt="" class="micro">
+            <img src="./public/play.png" alt="" class="play">
+        </div>
+    </header>
+    <main>
+        <div class="weather">
+            <div class="cityTime">
+                <div class="city"></div>
+                <div class="time">
+                    <div class="date"></div>
+                <div class="timer"></div>
+                </div>
+            </div>
+            <div class="weatherToday">
+                <div class="tempToday"></div>
+                <div class="infoToday">
+                    <img src="" alt="" class="iconToday">
+                    <div class="description"></div>
+                    <div class="feelsCont">
+                        <span class="feel">Feels like:</span>
+                        <span class="feelsVal"></span>
+                        <span class="feelOp">°C</span>
+                    </div>
+                    <div class="windCont">
+                        <span class="wind">Wind:</span>
+                        <span class="windVal"></span>
+                        <span class="windOp">m/s</span>
+                    </div>
+                    <div class="humidityCont">
+                        <span class="humidity">Humidity:</span>
+                        <span class="humidityVal"></span>
+                        <span class="humidityOp">%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="weatherNextContain">
+                <div class="nextDay">
+                    <div class="weekdayNext"></div>
+                    <div class="weatherNext">
+                        <div class="tempNext"></div>
+                        <img src="" alt="" class="iconNext">
+                    </div>  
+                </div>
+                <div class="nextDay">
+                    <div class="weekdayNext"></div>
+                    <div class="weatherNext">
+                        <div class="tempNext"></div>
+                        <img src="" alt="" class="iconNext">
+                    </div>  
+                </div>
+                <div class="nextDay">
+                    <div class="weekdayNext"></div>
+                    <div class="weatherNext">
+                        <div class="tempNext"></div>
+                        <img src="" alt="" class="iconNext">
+                    </div>  
+                </div>
+            </div>
+        </div>
+        <div class="map">
+            <div id="map"></div>
+            <div class="coords">
+                <div class="latitude">
+                    <div class="latInfo">Latitude:</div>
+                    <div class="latVal"></div>
+                </div>
+                <div class="longitude">
+                    <div class="longInfo">Longitude:</div>
+                    <div class="longVal"></div>
+                </div>
+            </div>
+        </div>
+    </main> 
+</body>
+</html>
