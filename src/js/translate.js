@@ -29,6 +29,7 @@ class Translate {
     const city = document.querySelector('.city');
     const date = document.querySelector('.date');
     const weekdayNext = document.querySelectorAll('.weekdayNext');
+    const main = document.querySelector('main');
 
     async function trans() {
       const cityTrans = await getTranslation(city.innerHTML, context.langFrom, context.langTo);
@@ -42,18 +43,16 @@ class Translate {
       weekdayNext[0].innerHTML = weekOneTrans;
       weekdayNext[1].innerHTML = weekTwoTrans;
       weekdayNext[2].innerHTML = weekThreeTrans;
+      description.innerHTML = descriptionObj[context.id];
+      feel.innerHTML = descriptionObj.feel;
+      wind.innerHTML = descriptionObj.wind;
+      humidity.innerHTML = descriptionObj.humidity;
+      windOp.innerHTML = descriptionObj.wOp;
+      latInfo.innerHTML = descriptionObj.lat;
+      longInfo.innerHTML = descriptionObj.lng;
     }
 
     trans();
-
-    // eslint-disable-next-line prefer-destructuring
-    description.innerHTML = descriptionObj[this.id];
-    feel.innerHTML = descriptionObj.feel;
-    wind.innerHTML = descriptionObj.wind;
-    humidity.innerHTML = descriptionObj.humidity;
-    windOp.innerHTML = descriptionObj.wOp;
-    latInfo.innerHTML = descriptionObj.lat;
-    longInfo.innerHTML = descriptionObj.lng;
   }
 }
 

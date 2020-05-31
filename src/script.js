@@ -10,6 +10,8 @@ import WeatherIcons from './js/getIcon';
 import loader from './js/loader';
 import Translate from './js/translate';
 import Converter from './js/tempConverter';
+import speaks from './js/speaks';
+import GetText from './js/getText';
 
 const weatherIcons = new WeatherIcons();
 const city = document.querySelector('.city');
@@ -31,6 +33,7 @@ const buttonSearch = document.querySelector('.buttonSearch');
 const updateImg = document.querySelector('.updateImg');
 const chooseLang = document.querySelector('.chooseLang');
 const micro = document.querySelector('.micro');
+const play = document.querySelector('.play');
 
 
 async function searchRequest(val, context) {
@@ -81,9 +84,10 @@ class Applocation {
         `${coordsRes.timeOfDay}${resWeather[0].description}`
       );
       const resPic = await pic.getPic();
-      background.src = resPic;
       if (!resPic) {
         background.src = await './public/desc.jpg';
+      } else if (resPic) {
+        background.src = resPic;
       }
       tempToday.innerHTML = resWeather[0].temp;
       iconToday.src = weatherIcons[resWeather[0].icon];
@@ -106,6 +110,7 @@ class Applocation {
         const trans = new Translate(context.lang, localStorage.getItem('lang'), context.id);
         chooseLang.value = localStorage.getItem('lang');
         trans.do();
+        context.lang = localStorage.getItem('lang');
       }
       context.converter();
       loader(false);
@@ -193,6 +198,32 @@ class Applocation {
         micro.classList.remove('animMicro');
         recognition.abort();
         recognition.removeEventListener('end', recoStart);
+      }
+    });
+
+    play.addEventListener('click', () => {
+      if (!play.classList.contains('animPlay')) {
+        const msg = new SpeechSynthesisUtterance();
+        play.classList.add('animPlay');
+        msg.volume = 1;
+        msg.rate = 1.5;
+        msg.pitch = 1.5;
+        msg.text = new GetText(this.lang).do();
+        let voice;
+        console.log(this.lang);
+        if (this.lang === 'en') {
+          // eslint-disable-next-line prefer-destructuring
+          voice = speaks[10];
+        } else if (this.lang !== 'en') {
+          // eslint-disable-next-line prefer-destructuring
+          voice = speaks[27];
+        }
+        msg.voiceURI = voice.name;
+        msg.lang = voice.lang;
+        speechSynthesis.speak(msg);
+      } else if (play.classList.contains('animPlay')) {
+        speechSynthesis.cancel();
+        play.classList.remove('animPlay');
       }
     });
   }
