@@ -107,7 +107,7 @@ class Applocation {
       latVal.innerHTML = `${coordsRes.coord.lat}`;
       longVal.innerHTML = `${coordsRes.coord.lng}`;
       if (localStorage.getItem('lang')) {
-        const trans = new Translate(context.lang, localStorage.getItem('lang'), context.id);
+        const trans = new Translate('en', localStorage.getItem('lang'), context.id);
         chooseLang.value = localStorage.getItem('lang');
         trans.do();
         context.lang = localStorage.getItem('lang');

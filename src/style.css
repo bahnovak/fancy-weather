@@ -27,16 +27,7 @@ main, header {
      border-radius: 30px;
      display: block;
      box-shadow: 2px 2px 10px 3px black;
-}
-
-.map::after {
-    content: ''; 
-    position: relative;
-    left: 400px; 
-    bottom: 42px;
-    border: 30px solid transparent;
-    border-top: 20px solid rgb(245, 234, 234);
-    z-index: 100;
+     clip-path: polygon(100% 0, 100% 100%, 88% 91%, 0 91%, 0 0);
 }
 
 .mapOpacity {
