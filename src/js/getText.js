@@ -8,14 +8,14 @@ class GetRquestByVoise {
     let nextDay;
     const city = document.querySelector('.city').innerHTML;
     let temp;
-    const tempToday = `${document.querySelector('.tempToday').innerHTML}°`;
+    const tempToday = `${document.querySelector('.temp-today').innerHTML}°`;
     const description = document.querySelector('.description').innerHTML;
     const feel = `${document.querySelector('.feel').innerHTML}
-      ${document.querySelector('.feelsVal').innerHTML}°`;
+      ${document.querySelector('.feels-val').innerHTML}°`;
     const wind = `${document.querySelector('.wind').innerHTML} 
-      ${document.querySelector('.windVal').innerHTML}  
+      ${document.querySelector('.wind-val').innerHTML}  
       `;
-    const humidity = `${document.querySelector('.humidity').innerHTML}${document.querySelector('.humidityVal').innerHTML}${document.querySelector('.humidityOp').innerHTML}.`;
+    const humidity = `${document.querySelector('.humidity').innerHTML}${document.querySelector('.humidity-val').innerHTML}${document.querySelector('.humidity-op').innerHTML}.`;
     if (this.lang === 'en') {
       temp = 'Temperature';
       weatherToday = 'Weather forecast for today.';
@@ -25,8 +25,8 @@ class GetRquestByVoise {
       weatherToday = 'Погода на сегодня.';
       nextDay = 'Погода на следующие дни.';
     }
-    const weekdayNext = document.querySelectorAll('.weekdayNext');
-    const tempNext = document.querySelectorAll('.tempNext');
+    const weekdayNext = document.querySelectorAll('.weekday-next');
+    const tempNext = document.querySelectorAll('.temp-next');
 
     return `${weatherToday}. ${city}. ${temp} ${tempToday}. ${description}. ${feel}.
      ${wind}. ${humidity}. ${nextDay}. ${weekdayNext[0].innerHTML} ${tempNext[0].innerHTML}° .  

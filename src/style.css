@@ -13,7 +13,7 @@
     z-index: 0;
 }
 
-.backgroundOpacity {
+.background-opacity {
     opacity: 0;
 }
 main, header {
@@ -30,7 +30,7 @@ main, header {
      clip-path: polygon(100% 0, 100% 100%, 88% 91%, 0 91%, 0 0);
 }
 
-.mapOpacity {
+.map-opacity {
     opacity: 0;
 }
 
@@ -48,7 +48,7 @@ header {
     flex-wrap: wrap;
 }
 
-.contentOff {
+.content-off {
     visibility: hidden;
 }
 
@@ -66,7 +66,7 @@ main {
     border-radius: 10px;
 }
 
-.cityTime {
+.city-time {
     width: 500px;
 }
 
@@ -87,49 +87,49 @@ main {
     margin-left: 10px;
 }
 
-.weatherToday {
+.weather-today {
     display: flex;
     font-size: 20px;
     font-weight: 500;
     flex-wrap: wrap;
 }
 
-.infoToday {
+.info-today {
     line-height: 30px;
 }
 
-.tempToday {
+.temp-today {
     font-size: 250px;
     font-weight: 700;
     margin-right: 50px;
 }
 
-.iconToday {
+.icon-today {
     height:150px;
     text-shadow: blanchedalmond;
 }
 
-.iconNext {
+.icon-next {
     height: 30px;
     fill: rgb(231, 230, 230);
 }
 
-.weatherNextContain {
+.weather-next-contain {
     margin-top: 30px;
     display: flex;
 }
 
-.nextDay {
+.next-day {
     margin-right: 20px;
     font-size: 20px;
 }
 
-.tempNext {
+.temp-next {
     font-size: 40px;
     margin-right: 20px;
 }
 
-.weatherNext {
+.weather-next {
     display: flex;
 }
 
@@ -172,11 +172,11 @@ main {
         justify-content: center;
     }
 
-    .iconToday {
+    .icon-today {
         height:50px;
     }
 
-    .tempToday {
+    .temp-today {
         font-size: 100px;
         font-weight: 700;
         margin-right: 0px;
@@ -211,7 +211,7 @@ main {
         width: 300px;
     }
 
-    .weatherNextContain {
+    .weather-next-contain {
         display: flex;
         flex-wrap: wrap;
     }

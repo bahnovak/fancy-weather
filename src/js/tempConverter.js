@@ -1,9 +1,9 @@
 class Converter {
   do() {
-    const tempToday = document.querySelector('.tempToday');
-    const feelsVal = document.querySelector('.feelsVal');
-    const feelOp = document.querySelector('.feelOp');
-    const tempNext = document.querySelectorAll('.tempNext');
+    const tempToday = document.querySelector('.temp-today');
+    const feelsVal = document.querySelector('.feels-val');
+    const feelOp = document.querySelector('.feel-op');
+    const tempNext = document.querySelectorAll('.temp-next');
     const cel = document.querySelector('.cel');
     const fah = document.querySelector('.fah');
     const temperature = document.querySelector('.temperature');

@@ -15,22 +15,22 @@ import GetRquestByVoise from './js/getText';
 const weatherIcons = new WeatherIcons();
 const city = document.querySelector('.city');
 const timer = document.querySelector('.time');
-const tempToday = document.querySelector('.tempToday');
-const iconToday = document.querySelector('.iconToday');
+const tempToday = document.querySelector('.temp-today');
+const iconToday = document.querySelector('.icon-today');
 const description = document.querySelector('.description');
-const feelsVal = document.querySelector('.feelsVal');
-const windVal = document.querySelector('.windVal');
-const humidityVal = document.querySelector('.humidityVal');
-const weekdayNext = document.querySelectorAll('.weekdayNext');
-const tempNext = document.querySelectorAll('.tempNext');
-const iconNext = document.querySelectorAll('.iconNext');
-const latVal = document.querySelector('.latVal');
-const longVal = document.querySelector('.longVal');
+const feelsVal = document.querySelector('.feels-val');
+const windVal = document.querySelector('.wind-val');
+const humidityVal = document.querySelector('.humidity-val');
+const weekdayNext = document.querySelectorAll('.weekday-next');
+const tempNext = document.querySelectorAll('.temp-next');
+const iconNext = document.querySelectorAll('.icon-next');
+const latVal = document.querySelector('.lat-val');
+const longVal = document.querySelector('.long-val');
 const background = document.querySelector('.background');
-const citySearch = document.querySelector('.citySearch');
-const buttonSearch = document.querySelector('.buttonSearch');
-const updateImg = document.querySelector('.updateImg');
-const chooseLang = document.querySelector('.chooseLang');
+const citySearch = document.querySelector('.city-search');
+const buttonSearch = document.querySelector('.button-search');
+const updateImg = document.querySelector('.update-img');
+const chooseLang = document.querySelector('.choose-lang');
 const micro = document.querySelector('.micro');
 const play = document.querySelector('.play');
 
@@ -41,10 +41,10 @@ async function searchRequest(val, context) {
   if (resWeather) {
     context.init(val);
   } else {
-    citySearch.classList.add('citySearchIncorrect');
+    citySearch.classList.add('city-search-incorrect');
     citySearch.value = 'Incorrect request';
     setTimeout(() => {
-      citySearch.classList.remove('citySearchIncorrect');
+      citySearch.classList.remove('city-search-incorrect');
       setTimeout(() => {
         citySearch.value = '';
       }, 500);
@@ -146,13 +146,13 @@ class Applocation {
     const context = this;
     async function update() {
       updateImg.classList.add('anim');
-      background.classList.add('backgroundOpacity');
+      background.classList.add('background-opacity');
       const pic = new GetPicture(
         `${context.description} ${context.timeOfDay}`
       );
       const resPic = await pic.getPic();
       background.src = await resPic;
-      setTimeout(() => background.classList.remove('backgroundOpacity'), 500);
+      setTimeout(() => background.classList.remove('background-opacity'), 500);
       if (!resPic) {
         background.src = await './public/desc.jpg';
       }
@@ -178,8 +178,8 @@ class Applocation {
     }
     micro.addEventListener('click', (ev) => {
       ev.stopPropagation();
-      if (!micro.classList.contains('animMicro')) {
-        micro.classList.add('animMicro');
+      if (!micro.classList.contains('anim-micro')) {
+        micro.classList.add('anim-micro');
         recognition.addEventListener('result', (event) => {
           const transcript = Array.from(event.results)
             .map((result) => result[0])
@@ -191,17 +191,17 @@ class Applocation {
         });
         recognition.addEventListener('end', recoStart);
         recognition.start();
-      } else if (micro.classList.contains('animMicro')) {
-        micro.classList.remove('animMicro');
+      } else if (micro.classList.contains('anim-micro')) {
+        micro.classList.remove('anim-micro');
         recognition.abort();
         recognition.removeEventListener('end', recoStart);
       }
     });
 
     play.addEventListener('click', () => {
-      if (!play.classList.contains('animPlay')) {
+      if (!play.classList.contains('anim-play')) {
         const msg = new SpeechSynthesisUtterance();
-        play.classList.add('animPlay');
+        play.classList.add('anim-play');
         msg.volume = 1;
         msg.rate = 1.5;
         msg.pitch = 1.5;
@@ -217,9 +217,9 @@ class Applocation {
         msg.voiceURI = voice.name;
         msg.lang = voice.lang;
         speechSynthesis.speak(msg);
-      } else if (play.classList.contains('animPlay')) {
+      } else if (play.classList.contains('anim-play')) {
         speechSynthesis.cancel();
-        play.classList.remove('animPlay');
+        play.classList.remove('anim-play');
       }
     });
   }

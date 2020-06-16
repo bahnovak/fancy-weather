@@ -1,7 +1,7 @@
 function getTimesOfDay(obj, sec) {
   const checkObject = obj && obj.rise && obj.set && obj.set.apparent && obj.rise.apparent;
   if (!checkObject) {
-    throw new Error('Uncorrect data');
+    throw new Error('Incorrect data');
   }
   const zoneHours = sec / 3600;
   const dateNow = new Date();

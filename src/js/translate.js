@@ -22,12 +22,12 @@ class Translate {
     const feel = document.querySelector('.feel');
     const wind = document.querySelector('.wind');
     const humidity = document.querySelector('.humidity');
-    const windOp = document.querySelector('.windOp');
-    const latInfo = document.querySelector('.latInfo');
-    const longInfo = document.querySelector('.longInfo');
+    const windOp = document.querySelector('.wind-op');
+    const latInfo = document.querySelector('.lat-info');
+    const longInfo = document.querySelector('.long-info');
     const city = document.querySelector('.city');
     const date = document.querySelector('.date');
-    const weekdayNext = document.querySelectorAll('.weekdayNext');
+    const weekdayNext = document.querySelectorAll('.weekday-next');
 
     async function trans() {
       const cityTrans = await getTranslation(city.innerHTML, context.langFrom, context.langTo);

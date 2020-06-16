@@ -4,13 +4,13 @@ const header = document.querySelector('header');
 
 function loader(val) {
   if (val) {
-    load.classList.add('loadOn');
-    main.classList.add('contentOff');
+    load.classList.add('load-on');
+    main.classList.add('content-off');
   }
 
   if (!val) {
-    load.classList.remove('loadOn');
-    main.classList.remove('contentOff');
+    load.classList.remove('load-on');
+    main.classList.remove('content-off');
   }
 }
 

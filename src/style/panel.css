@@ -2,15 +2,15 @@
     display: flex;
 }
 
-.updateImg, .lang {
+.update-img, .lang {
     margin-right: 10px;
 }
 
-.updateImg img {
+.update-img img {
     transition: 0.5s;
 }
 
-.updateImg img:hover {
+.update-img img:hover {
     transform: scale(1.1);
     filter: drop-shadow(0 0 10px rgb(139, 139, 139));
 }
@@ -74,7 +74,7 @@
     align-items: center;
 }
 
-.citySearch {
+.city-search {
     transition: 0.5s;
     box-sizing: border-box;
     width: 274px;
@@ -87,16 +87,16 @@
     color: rgb(255, 255, 255);
 }
 
-.citySearchIncorrect {
+.city-search-incorrect {
     color: red;
     font-size: 20px;
 }
 
-.citySearch:hover{
+.city-search:hover{
     background: rgba(243, 243, 243, 0.4);
 }
 
-.citySearch::placeholder {
+.city-search::placeholder {
     font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
@@ -104,7 +104,7 @@
     line-height: 17px;
 }
 
-.buttonSearch {
+.button-search {
     transition: 0.5s;
     border: none;
     width: 101px;
@@ -122,11 +122,11 @@
     color: #FFFFFF;
 }
 
-.buttonSearch:hover {
+.button-search:hover {
     background: rgba(63, 63, 63, 0.5);
 }
 
-.buttonSearch:active {
+.button-search:active {
     transition: 0.1s;
     box-shadow: inset 0 0 5px 5px rgb(117, 117, 116);
 }
@@ -146,11 +146,11 @@
     animation: 0.7s linear 0s infinite normal anim;
 }
 
-.animMicro {
+.anim-micro {
     animation: 0.7s linear 0s infinite alternate animMicro;
 }
 
-.animPlay {
+.anim-play {
     animation: 0.7s linear 0s infinite alternate animPlay;
 }
 
