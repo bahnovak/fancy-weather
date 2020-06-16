@@ -1,6 +1,8 @@
-/* eslint-disable prettier/prettier */
-
 function getTimesOfDay(obj, sec) {
+  const checkObject = obj && obj.rise && obj.set && obj.set.apparent && obj.rise.apparent;
+  if (!checkObject) {
+    throw new Error('Uncorrect data');
+  }
   const zoneHours = sec / 3600;
   const dateNow = new Date();
   dateNow.setHours(dateNow.getUTCHours() + zoneHours);
@@ -14,6 +16,7 @@ function getTimesOfDay(obj, sec) {
   }
   return 'night';
 }
+
 class GetCoords {
   constructor(request) {
     this.request = request;
@@ -24,12 +27,13 @@ class GetCoords {
     const conntext = this;
     async function getPos() {
       const res = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${conntext.request}&key=f5a4e91f008a486eabc54807865a5f8e&pretty=1&limit=1&language=en`);
-      const coords = await res.json();
-      result.city = coords.results[0].formatted;
-      result.coord = coords.results[0].annotations.DMS;
-      result.sec = coords.results[0].annotations.timezone.offset_sec;
-      result.timeOfDay = getTimesOfDay(coords.results[0].annotations.sun, result.sec);
-      result.coordForMap = coords.results[0].geometry;
+      const data = await res.json();
+      const coords = data.results[0];
+      result.city = coords.formatted;
+      result.coord = coords.annotations.DMS;
+      result.sec = coords.annotations.timezone.offset_sec;
+      result.timeOfDay = getTimesOfDay(coords.annotations.sun, result.sec);
+      result.coordForMap = coords.geometry;
       return result;
     }
     return getPos();

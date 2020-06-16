@@ -163,33 +163,13 @@ main {
     main {
         justify-content: center;
     }
-
-    .map::after {
-        content: ''; 
-        position: relative;
-        left: 0; 
-        bottom: 0;
-        border: 0 solid transparent;
-        border-top: 0 solid rgb(245, 234, 234);
-        z-index: 0;
-    }
 }
 
 @media screen and (max-width: 780px) {
     body {
-        display: flex;
         margin: 0;
         padding: 0;
         justify-content: center;
-    }
-    .map::after {
-        content: ''; 
-        position: relative;
-        left: 0; 
-        bottom: 0;
-        border: 0 solid transparent;
-        border-top: 0 solid rgb(245, 234, 234);
-        z-index: 0;
     }
 
     .iconToday {
@@ -203,7 +183,6 @@ main {
     }
 
     header {
-        width: 100%;
         display: flex;
         justify-content: center;
     }
@@ -236,5 +215,4 @@ main {
         display: flex;
         flex-wrap: wrap;
     }
-
 }

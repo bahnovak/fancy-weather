@@ -11,14 +11,27 @@ class Converter {
     function toFah() {
       cel.classList.remove('active');
       fah.classList.add('active');
-      tempToday.innerHTML = Math.round(+tempToday.innerHTML * 1.8 + 32);
-      feelsVal.innerHTML = Math.round(+feelsVal.innerHTML * 1.8 + 32);
+      tempToday.innerHTML = Math.round(Number(tempToday.innerHTML) * 1.8 + 32);
+      feelsVal.innerHTML = Math.round(Number(feelsVal.innerHTML) * 1.8 + 32);
       feelOp.innerHTML = '°F';
       tempNext.forEach((element) => {
         // eslint-disable-next-line no-param-reassign
-        element.innerHTML = Math.round(+element.innerHTML * 1.8 + 32);
+        element.innerHTML = Math.round(Number(element.innerHTML) * 1.8 + 32);
       });
       localStorage.setItem('temp', 'fah');
+    }
+
+    function toCel() {
+      cel.classList.add('active');
+      fah.classList.remove('active');
+      tempToday.innerHTML = Math.round((Number(tempToday.innerHTML) - 32) / 1.8);
+      feelsVal.innerHTML = Math.round((Number(feelsVal.innerHTML) - 32) / 1.8);
+      feelOp.innerHTML = '°C';
+      tempNext.forEach((element) => {
+        // eslint-disable-next-line no-param-reassign
+        element.innerHTML = Math.round((Number(element.innerHTML) - 32) / 1.8);
+      });
+      localStorage.setItem('temp', 'cel');
     }
 
     if (localStorage.getItem('temp') === 'fah') {
@@ -32,16 +45,7 @@ class Converter {
         }
 
         if (event.target.classList.contains('cel')) {
-          cel.classList.add('active');
-          fah.classList.remove('active');
-          tempToday.innerHTML = Math.round((+tempToday.innerHTML - 32) / 1.8);
-          feelsVal.innerHTML = Math.round((+feelsVal.innerHTML - 32) / 1.8);
-          feelOp.innerHTML = '°C';
-          tempNext.forEach((element) => {
-            // eslint-disable-next-line no-param-reassign
-            element.innerHTML = Math.round((+element.innerHTML - 32) / 1.8);
-          });
-          localStorage.setItem('temp', 'cel');
+          toCel();
         }
       }
     });

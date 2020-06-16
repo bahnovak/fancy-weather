@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 function addZero(val) {
   if (val < 10) {
     return `0${val}`;

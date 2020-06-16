@@ -1,10 +1,9 @@
-/* eslint-disable prettier/prettier */
-class GetText {
+class GetRquestByVoise {
   constructor(lang) {
     this.lang = lang;
   }
 
-  do() {
+  createRequest() {
     let weatherToday;
     let nextDay;
     const city = document.querySelector('.city').innerHTML;
@@ -35,4 +34,4 @@ class GetText {
   }
 }
 
-export default GetText;
+export default GetRquestByVoise;

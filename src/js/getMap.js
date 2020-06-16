@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
 function mapInit(lat, long) {
   mapboxgl.accessToken = 'pk.eyJ1IjoiYmFobm92YWsiLCJhIjoiY2thamNsc2VpMDllMjJxbXcxenU1N2R3biJ9.9M8FN8hpNl69RzETLP0AnQ';

@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-/* eslint-disable prettier/prettier */
 import WeatherDescription from './weatherDescription';
 
 async function getTranslation(word, from, to) {
@@ -29,7 +28,6 @@ class Translate {
     const city = document.querySelector('.city');
     const date = document.querySelector('.date');
     const weekdayNext = document.querySelectorAll('.weekdayNext');
-    const main = document.querySelector('main');
 
     async function trans() {
       const cityTrans = await getTranslation(city.innerHTML, context.langFrom, context.langTo);

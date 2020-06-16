@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable comma-dangle */
 import './style.css';
 import GetWeather from './js/getweather';
@@ -10,8 +9,8 @@ import WeatherIcons from './js/getIcon';
 import loader from './js/loader';
 import Translate from './js/translate';
 import Converter from './js/tempConverter';
-import speaks from './js/speaks';
-import GetText from './js/getText';
+import speakers from './js/speaks';
+import GetRquestByVoise from './js/getText';
 
 const weatherIcons = new WeatherIcons();
 const city = document.querySelector('.city');
@@ -119,7 +118,7 @@ class Applocation {
     information();
   }
 
-  search() {
+  addListeners() {
     buttonSearch.addEventListener('click', () => {
       searchRequest(citySearch.value, this);
       citySearch.value = '';
@@ -128,6 +127,17 @@ class Applocation {
       if (event.key === 'Enter') {
         searchRequest(citySearch.value, this);
         citySearch.value = '';
+      }
+    });
+    updateImg.addEventListener('click', () => {
+      this.updatePic();
+    });
+    chooseLang.addEventListener('click', (event) => {
+      if (event.target.value !== this.lang) {
+        const trans = new Translate(this.lang, event.target.value, this.id);
+        trans.do();
+        this.lang = event.target.value;
+        localStorage.setItem('lang', event.target.value);
       }
     });
   }
@@ -148,20 +158,7 @@ class Applocation {
       }
       setTimeout(() => updateImg.classList.remove('anim'), 500);
     }
-    updateImg.addEventListener('click', () => {
-      update();
-    });
-  }
-
-  translate() {
-    chooseLang.addEventListener('click', (event) => {
-      if (event.target.value !== this.lang) {
-        const trans = new Translate(this.lang, event.target.value, this.id);
-        trans.do();
-        this.lang = event.target.value;
-        localStorage.setItem('lang', event.target.value);
-      }
-    });
+    update();
   }
 
   converter() {
@@ -208,15 +205,14 @@ class Applocation {
         msg.volume = 1;
         msg.rate = 1.5;
         msg.pitch = 1.5;
-        msg.text = new GetText(this.lang).do();
+        msg.text = new GetRquestByVoise(this.lang).createRequest();
         let voice;
-        console.log(this.lang);
         if (this.lang === 'en') {
           // eslint-disable-next-line prefer-destructuring
-          voice = speaks[10];
+          voice = speakers[10];
         } else if (this.lang !== 'en') {
           // eslint-disable-next-line prefer-destructuring
-          voice = speaks[27];
+          voice = speakers[27];
         }
         msg.voiceURI = voice.name;
         msg.lang = voice.lang;
@@ -231,8 +227,7 @@ class Applocation {
 
 const app = new Applocation();
 app.init();
-app.search();
+app.addListeners();
 app.updatePic();
-app.translate();
 app.converter();
 app.recognition();

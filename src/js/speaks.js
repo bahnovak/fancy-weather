@@ -1,4 +1,4 @@
-const speaks = [
+const speakers = [
   {
     name: 'Alex',
     lang: 'en-US',
@@ -189,4 +189,4 @@ const speaks = [
   },
 ];
 
-export default speaks;
+export default speakers;
