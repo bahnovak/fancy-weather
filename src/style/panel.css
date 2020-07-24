@@ -1,0 +1,188 @@
+.control {
+    display: flex;
+}
+
+.update-img, .lang {
+    margin-right: 10px;
+}
+
+.update-img img {
+    transition: 0.5s;
+}
+
+.update-img img:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 10px rgb(139, 139, 139));
+}
+
+.lang select {
+    height: 45px;
+    width: 71px;
+    background: rgba(174, 181, 185, 0.5);
+    border-radius: 5px;
+    border: none;
+    font-family: Montserrat;
+    padding-left: 15px;
+    font-size: 17px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.lang select:hover {
+    background: rgba(214, 217, 219, 0.5);
+}
+
+.temperature {
+    display: flex;
+}
+
+.cel, .fah {
+    transition: 1s;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    height: 45px;
+    width: 45px;
+    font-size: 25px;
+    font-weight: 600;
+    background: rgba(174, 181, 185, 0.5);
+    color: rgb(24, 24, 24);
+}
+
+.cel {
+    border-radius: 5px 0 0 5px;
+}
+
+.fah {
+    border-radius: 0 5px 5px 0;
+}
+
+.cel:hover, .fah:hover {
+    transition: 0.2s;
+    transform: scale(1.03);
+}
+
+.active {
+    box-shadow: inset 0 0 5px 1px rgba(0, 0, 0, 0.89), 0 0 1px 0 rgb(255, 255, 255);
+    color: rgb(223, 223, 223);
+}
+
+.search {
+    display: flex;
+    align-items: center;
+}
+
+.city-search {
+    transition: 0.5s;
+    box-sizing: border-box;
+    width: 274px;
+    height: 45px;
+    background: rgba(76, 82, 85, 0.4);
+    border: 1px solid rgba(228, 227, 227, 0.2);
+    font-family: Montserrat;
+    font-size: 16px;
+    padding-left: 15px;
+    color: rgb(255, 255, 255);
+}
+
+.city-search-incorrect {
+    color: red;
+    font-size: 20px;
+}
+
+.city-search:hover{
+    background: rgba(243, 243, 243, 0.4);
+}
+
+.city-search::placeholder {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.button-search {
+    transition: 0.5s;
+    border: none;
+    width: 101px;
+    height: 44px;
+    background: rgba(174, 181, 185, 0.5);
+    border-radius: 0 5px 5px 0;
+    box-sizing: border-box;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.button-search:hover {
+    background: rgba(63, 63, 63, 0.5);
+}
+
+.button-search:active {
+    transition: 0.1s;
+    box-shadow: inset 0 0 5px 5px rgb(117, 117, 116);
+}
+
+.micro, .play {
+    cursor: pointer;
+    transition: 0.5s;
+    height: 35px;
+    margin-left: 10px;
+}
+
+.micro:hover, .play:hover {
+    transform: scale(1.1);
+}
+
+.anim {
+    animation: 0.7s linear 0s infinite normal anim;
+}
+
+.anim-micro {
+    animation: 0.7s linear 0s infinite alternate animMicro;
+}
+
+.anim-play {
+    animation: 0.7s linear 0s infinite alternate animPlay;
+}
+
+
+@keyframes animMicro {
+    0% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 7px rgb(253, 0, 0));
+    }
+}
+
+@keyframes animPlay {
+    0% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 7px rgb(0, 253, 21));
+    }
+}
+
+@keyframes anim {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
